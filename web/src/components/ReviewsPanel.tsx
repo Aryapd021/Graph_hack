@@ -4,6 +4,31 @@ import { api, type ReviewRequestOut } from '../api/client';
 import { useBrainStore } from '../store/brainStore';
 import { CheckSquare, User, Loader2, Calendar } from 'lucide-react';
 
+const AssigneeTag: React.FC<{ id: string }> = ({ id }) => {
+  const setSelectedNodeId = useBrainStore((state) => state.setSelectedNodeId);
+  const setRightTab = useBrainStore((state) => state.setRightTab);
+
+  const { data: node } = useQuery({
+    queryKey: ['node', id],
+    queryFn: () => api.getNodeDetail(id),
+    staleTime: 60000,
+  });
+
+  return (
+    <button
+      onClick={() => {
+        setSelectedNodeId(id);
+        setRightTab('node');
+      }}
+      className="inline-flex items-center gap-1 text-slate-300 hover:text-sky-300 font-mono text-[11px] bg-slate-800/80 hover:bg-slate-750 px-2 py-0.5 rounded border border-slate-700/60 transition-colors"
+      title={`Resolved via /api/node/${id}: ${node?.display || id}`}
+    >
+      <User className="w-3 h-3 text-sky-400" />
+      <span>{node ? node.display : id}</span>
+    </button>
+  );
+};
+
 export const ReviewsPanel: React.FC = () => {
   const setSelectedNodeId = useBrainStore((state) => state.setSelectedNodeId);
   const setRightTab = useBrainStore((state) => state.setRightTab);
@@ -102,16 +127,20 @@ export const ReviewsPanel: React.FC = () => {
               </div>
 
               {/* Meta details footer */}
-              <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 pt-1 border-t border-slate-800/60">
-                <div className="flex items-center gap-1">
-                  <Calendar className="w-3 h-3 text-slate-500" />
-                  <span>{dateStr}</span>
+              <div className="flex flex-col gap-1.5 text-[11px] font-mono text-slate-400 pt-1.5 border-t border-slate-800/60">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1">
+                    <Calendar className="w-3 h-3 text-slate-500" />
+                    <span>{dateStr}</span>
+                  </div>
                 </div>
 
                 {rev.assignee_ids && rev.assignee_ids.length > 0 && (
-                  <div className="flex items-center gap-1 text-slate-300">
-                    <User className="w-3 h-3 text-sky-400" />
-                    <span>{rev.assignee_ids.join(', ')}</span>
+                  <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
+                    <span className="text-[10px] text-slate-500">Assignees:</span>
+                    {rev.assignee_ids.map((aid) => (
+                      <AssigneeTag key={aid} id={aid} />
+                    ))}
                   </div>
                 )}
               </div>
@@ -122,3 +151,4 @@ export const ReviewsPanel: React.FC = () => {
     </div>
   );
 };
+

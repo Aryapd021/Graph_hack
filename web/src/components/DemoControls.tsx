@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { api, type ModuleSummary, type SimulatePRResponse } from '../api/client';
+import { api, type ModuleSummary, type SimulatePRResponse, type DecisionSummary } from '../api/client';
 import { Play, RotateCcw, RefreshCw, X, Check, Loader2, Sparkles } from 'lucide-react';
 
 interface DemoControlsProps {
@@ -41,6 +41,7 @@ export const DemoControls: React.FC<DemoControlsProps> = ({
     mutationFn: (variables: { moduleId: string; title: string }) =>
       api.simulatePR(variables.moduleId, variables.title),
     onSuccess: (data: SimulatePRResponse) => {
+      const decisionsCache = queryClient.getQueryData<DecisionSummary[]>(['decisions']);
       queryClient.invalidateQueries({ queryKey: ['decisions'] });
       queryClient.invalidateQueries({ queryKey: ['health'] });
       queryClient.invalidateQueries({ queryKey: ['graph'] });
@@ -48,11 +49,15 @@ export const DemoControls: React.FC<DemoControlsProps> = ({
 
       if (data.changed && data.changed.length > 0) {
         const changesText = data.changed
-          .map((c) => `${c.decision_id}: ${c.before} ➔ ${c.after}`)
+          .map((c) => {
+            const dec = decisionsCache?.find((d) => d.id === c.decision_id);
+            const title = dec ? dec.title : c.decision_id;
+            return `"${title}": ${c.before} to ${c.after}`;
+          })
           .join(', ');
-        onToast?.(`PR ${data.pr_id} merged! Drift updated: ${changesText}`, 'warning');
+        onToast?.(`PR ${data.pr_id} merged! Changed: ${changesText}`, 'warning');
       } else {
-        onToast?.(`PR ${data.pr_id} simulated, no decisions crossed drift threshold.`, 'info');
+        onToast?.(`PR ${data.pr_id} simulated. No decisions changed freshness.`, 'info');
       }
     },
     onError: (err: Error) => {
@@ -66,8 +71,8 @@ export const DemoControls: React.FC<DemoControlsProps> = ({
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ['decisions'] });
       queryClient.invalidateQueries({ queryKey: ['reviews'] });
-      queryClient.invalidateQueries({ queryKey: ['health'] });
       queryClient.invalidateQueries({ queryKey: ['graph'] });
+      queryClient.invalidateQueries({ queryKey: ['health'] });
       onToast?.(`Demo reset complete: ${data.removed_nodes} simulated nodes removed.`, 'success');
     },
     onError: (err: Error) => {
@@ -81,41 +86,45 @@ export const DemoControls: React.FC<DemoControlsProps> = ({
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ['health'] });
       queryClient.invalidateQueries({ queryKey: ['graph'] });
-      onToast?.(`Ingest refreshed: ${data.new_prs} new PRs, ${data.new_files} files.`, 'success');
+      onToast?.(`Ingest refresh: ${data.new_prs} new PRs, ${data.new_files} new files.`, 'success');
     },
     onError: (err: Error) => {
       onToast?.(`Refresh failed: ${err.message}`, 'warning');
     },
   });
 
-  if (!demoMode) return null;
+  if (!demoMode && !ingestRefresh) return null;
 
   return (
     <div className="flex items-center gap-2">
       {/* Simulate PR Button */}
-      <button
-        onClick={() => setShowSimulateModal(true)}
-        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium font-mono bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 transition-all shadow-sm"
-        title="Simulate a new merged pull request to induce drift and flip decision freshness"
-      >
-        <Play className="w-3.5 h-3.5 text-amber-400" />
-        <span>Simulate PR</span>
-      </button>
+      {demoMode && (
+        <button
+          onClick={() => setShowSimulateModal(true)}
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium font-mono bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 transition-all shadow-sm"
+          title="Simulate a new merged pull request to induce drift and flip decision freshness"
+        >
+          <Play className="w-3.5 h-3.5 text-amber-400" />
+          <span>Simulate PR</span>
+        </button>
+      )}
 
       {/* Reset Demo Button */}
-      <button
-        onClick={() => resetMutation.mutate()}
-        disabled={resetMutation.isPending}
-        className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium font-mono bg-slate-800 hover:bg-slate-750 text-slate-300 border border-slate-700/80 transition-all shadow-sm disabled:opacity-50"
-        title="Reset demo PRs and all review requests back to baseline"
-      >
-        {resetMutation.isPending ? (
-          <Loader2 className="w-3.5 h-3.5 animate-spin" />
-        ) : (
-          <RotateCcw className="w-3.5 h-3.5 text-slate-400" />
-        )}
-        <span>Reset</span>
-      </button>
+      {demoMode && (
+        <button
+          onClick={() => resetMutation.mutate()}
+          disabled={resetMutation.isPending}
+          className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium font-mono bg-slate-800 hover:bg-slate-750 text-slate-300 border border-slate-700/80 transition-all shadow-sm disabled:opacity-50"
+          title="Reset demo PRs and all review requests back to baseline"
+        >
+          {resetMutation.isPending ? (
+            <Loader2 className="w-3.5 h-3.5 animate-spin" />
+          ) : (
+            <RotateCcw className="w-3.5 h-3.5 text-slate-400" />
+          )}
+          <span>Reset</span>
+        </button>
+      )}
 
       {/* Ingest Refresh (if enabled) */}
       {ingestRefresh && (
