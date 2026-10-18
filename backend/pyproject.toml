@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "company-brain"
+version = "0.1.0"
+description = "Company Brain backend packages"
+requires-python = ">=3.11"
+dependencies = [
+    "falkordb==1.8.0",
+    "fastapi==0.143.3",
+    "uvicorn",
+    "pydantic",
+    "pydantic-settings",
+    "httpx",
+    "mcp==2.3.0",
+    "google-genai==2.31.0",
+    "pytest",
+    "pytest-asyncio",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["brain_core*", "ingest*", "mcp_server*", "brain_api*"]

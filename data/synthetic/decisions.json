@@ -1,0 +1,226 @@
+[
+  {
+    "id": "dec_001",
+    "display": "Standardize error handling and exception formatting in docs/en/docs",
+    "summary": "Adopt centralized exception handlers and structured RFC-7807 error responses across docs/en/docs.",
+    "rationale": "Inconsistent error payloads between modules complicated API client development. Centralized validation and error mapping simplifies troubleshooting and client SDK generation.",
+    "decided_at": 1753522542,
+    "status": "superseded",
+    "decided_by": "p_a2f63251",
+    "affects": [
+      "m_docs_en_docs"
+    ],
+    "implemented_by": [
+      "pr_13535"
+    ],
+    "tracked_by": "tk_BRAIN-1",
+    "discussed_in": "th_001",
+    "superseded_by": "dec_010"
+  },
+  {
+    "id": "dec_002",
+    "display": "Migrate configuration parameters to environment variables in docs/en/docs/advanced",
+    "summary": "Move hardcoded and file-based runtime settings in docs/en/docs/advanced into 12-factor environment variables.",
+    "rationale": "Decoupling deployment configuration from application code allows seamless multi-environment orchestration and containerized runtime configuration.",
+    "decided_at": 1756627147,
+    "status": "superseded",
+    "decided_by": "p_d4928ba9",
+    "affects": [
+      "m_docs_en_docs_advanced"
+    ],
+    "implemented_by": [
+      "pr_11441"
+    ],
+    "tracked_by": "tk_BRAIN-2",
+    "discussed_in": "th_002",
+    "superseded_by": "dec_009"
+  },
+  {
+    "id": "dec_003",
+    "display": "Deprecate legacy synchronous interfaces in fastapi/dependencies",
+    "summary": "Formally deprecate blocking sync helpers in fastapi/dependencies in favor of native asynchronous patterns.",
+    "rationale": "High-throughput asynchronous workloads were blocked by legacy synchronous helper calls, causing event loop starvation under peak loads.",
+    "decided_at": 1758381953,
+    "status": "active",
+    "decided_by": "p_d04a0b32",
+    "affects": [
+      "m_fastapi_dependencies",
+      "m_tests"
+    ],
+    "implemented_by": [
+      "pr_13694"
+    ],
+    "tracked_by": "tk_BRAIN-3",
+    "discussed_in": "th_003",
+    "superseded_by": null
+  },
+  {
+    "id": "dec_004",
+    "display": "Implement structured request lifecycle telemetry in tests",
+    "summary": "Inject OpenTelemetry tracing spans and standardized metrics counters across key methods in tests.",
+    "rationale": "Distributed tracing was incomplete without module-level span boundaries, delaying root-cause analysis during production latency spikes.",
+    "decided_at": 1760193954,
+    "status": "active",
+    "decided_by": "p_02ad08f7",
+    "affects": [
+      "m_tests",
+      "m_fastapi"
+    ],
+    "implemented_by": [
+      "pr_14168"
+    ],
+    "tracked_by": "tk_BRAIN-4",
+    "discussed_in": "th_004",
+    "superseded_by": null
+  },
+  {
+    "id": "dec_005",
+    "display": "Enforce strict schema validation rules in fastapi/dependencies",
+    "summary": "Require strict Pydantic model validation on all external inputs received by fastapi/dependencies.",
+    "rationale": "Malformed payloads previously passed initial routing and triggered unexpected internal type errors deep within execution handlers.",
+    "decided_at": 1764643195,
+    "status": "active",
+    "decided_by": "p_80213f74",
+    "affects": [
+      "m_fastapi_dependencies",
+      "m_tests"
+    ],
+    "implemented_by": [
+      "pr_13537"
+    ],
+    "tracked_by": "tk_BRAIN-5",
+    "discussed_in": "th_005",
+    "superseded_by": null
+  },
+  {
+    "id": "dec_006",
+    "display": "Refactor dependency injection graph for tests/benchmarks",
+    "summary": "Simplify dependency overrides and sub-dependency resolution logic in tests/benchmarks.",
+    "rationale": "Circular references and deep nested scopes caused subtle caching issues when overriding dependencies in end-to-end integration test suites.",
+    "decided_at": 1766057049,
+    "status": "active",
+    "decided_by": "p_02ad08f7",
+    "affects": [
+      "m_tests_benchmarks"
+    ],
+    "implemented_by": [
+      "pr_14558"
+    ],
+    "tracked_by": "tk_BRAIN-6",
+    "discussed_in": "th_006",
+    "superseded_by": null
+  },
+  {
+    "id": "dec_007",
+    "display": "Optimize serialization and payload parsing in fastapi",
+    "summary": "Benchmark and streamline high-volume JSON encoding and decoding routines within fastapi.",
+    "rationale": "Profiling identified JSON serialization as the primary CPU bottleneck on data-heavy endpoints handling large collection responses.",
+    "decided_at": 1770647517,
+    "status": "active",
+    "decided_by": "p_1da23a1e",
+    "affects": [
+      "m_fastapi",
+      "m_tests"
+    ],
+    "implemented_by": [
+      "pr_14873"
+    ],
+    "tracked_by": "tk_BRAIN-7",
+    "discussed_in": "th_007",
+    "superseded_by": null
+  },
+  {
+    "id": "dec_008",
+    "display": "Adopt granular permission scoping across fastapi/security",
+    "summary": "Transition security scopes in fastapi/security to role-based access control with discrete capability tokens.",
+    "rationale": "Coarse-grained authentication tokens gave services broader permissions than necessary, conflicting with least-privilege security requirements.",
+    "decided_at": 1773649008,
+    "status": "active",
+    "decided_by": "p_74571562",
+    "affects": [
+      "m_fastapi_security",
+      "m_tests"
+    ],
+    "implemented_by": [
+      "pr_15116"
+    ],
+    "tracked_by": "tk_BRAIN-8",
+    "discussed_in": "th_008",
+    "superseded_by": null
+  },
+  {
+    "id": "dec_009",
+    "display": "Isolate connection pooling and retry policies in docs/en/docs/advanced",
+    "summary": "Configure dedicated client pool limits, timeouts, and exponential backoff strategies for docs/en/docs/advanced.",
+    "rationale": "Exhaustion of global socket pools by bursty downstream calls caused cascading timeouts in unrelated user-facing services.",
+    "decided_at": 1784917772,
+    "status": "active",
+    "decided_by": "p_1da23a1e",
+    "affects": [
+      "m_docs_en_docs_advanced",
+      "m_docs_en_docs_tutorial"
+    ],
+    "implemented_by": [
+      "pr_15967"
+    ],
+    "tracked_by": "tk_BRAIN-9",
+    "discussed_in": "th_009",
+    "superseded_by": null
+  },
+  {
+    "id": "dec_010",
+    "display": "Implement idempotent state transitions in docs/en/docs",
+    "summary": "Introduce idempotency keys and state preconditions for all mutating actions processed by docs/en/docs.",
+    "rationale": "Network retries by distributed clients caused duplicate state mutations and intermittent race conditions during failover.",
+    "decided_at": 1785227391,
+    "status": "active",
+    "decided_by": "p_02ad08f7",
+    "affects": [
+      "m_docs_en_docs",
+      "m_fastapi"
+    ],
+    "implemented_by": [
+      "pr_16088"
+    ],
+    "tracked_by": "tk_BRAIN-10",
+    "discussed_in": "th_010",
+    "superseded_by": null
+  },
+  {
+    "id": "dec_011",
+    "display": "Standardize pagination semantics and metadata in docs/en/docs/reference",
+    "summary": "Unify cursor-based pagination parameters and response envelopes across all listing endpoints in docs/en/docs/reference.",
+    "rationale": "Mixed use of offset and cursor pagination confused API consumers and caused inconsistent memory spikes when reading large collections.",
+    "decided_at": 1785244101,
+    "status": "active",
+    "decided_by": "p_381cc471",
+    "affects": [
+      "m_docs_en_docs_reference"
+    ],
+    "implemented_by": [
+      "pr_15930"
+    ],
+    "tracked_by": "tk_BRAIN-11",
+    "discussed_in": "th_011",
+    "superseded_by": null
+  },
+  {
+    "id": "dec_012",
+    "display": "Enhance cache invalidation coordination for docs/en/docs",
+    "summary": "Implement deterministic cache invalidation hooks triggered whenever entities in docs/en/docs change.",
+    "rationale": "Stale cached reads persisted across updates because invalidation events lacked granular cache tag association.",
+    "decided_at": 1785338138,
+    "status": "active",
+    "decided_by": "p_02ad08f7",
+    "affects": [
+      "m_docs_en_docs",
+      "m_fastapi"
+    ],
+    "implemented_by": [
+      "pr_16106"
+    ],
+    "tracked_by": "tk_BRAIN-12",
+    "discussed_in": "th_012",
+    "superseded_by": null
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "number": 1,
+    "title": "Initial routing setup",
+    "body_excerpt": "Setup initial routing logic.",
+    "created_at": 1699990000,
+    "merged_at": 1700000000,
+    "author_id": "p_00000001",
+    "url": "https://github.com/fastapi/fastapi/pull/1",
+    "files": ["fastapi/routing.py", "tests/test_routing.py"]
+  },
+  {
+    "number": 2,
+    "title": "Fix routing bug",
+    "body_excerpt": "Fix minor routing edge case.",
+    "created_at": 1700005000,
+    "merged_at": 1700010000,
+    "author_id": "p_00000002",
+    "url": "https://github.com/fastapi/fastapi/pull/2",
+    "files": ["fastapi/routing.py"]
+  }
+]

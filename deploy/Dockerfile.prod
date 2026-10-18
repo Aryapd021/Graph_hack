@@ -1,0 +1,46 @@
+# Multi-stage Dockerfile for Company Brain Production Deployment
+# Per ARCHITECTURE.md Section 18b:
+# 1. Node stage: build frontend web/dist
+# 2. Python stage: install backend, copy web/dist to /app/static, start uvicorn
+
+# --- Stage 1: Build Frontend SPA ---
+FROM node:20-alpine AS frontend-builder
+WORKDIR /app/web
+
+# Install build dependencies
+COPY web/package.json ./
+RUN npm install
+
+# Copy source and build static bundle
+COPY web/ ./
+RUN npm run build
+
+# --- Stage 2: Production Python API Service ---
+FROM python:3.11-slim AS production
+
+WORKDIR /app
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    SERVE_STATIC=true \
+    PORT=8000
+
+# Install system dependencies (curl for healthchecks)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install backend Python package and dependencies
+COPY backend/pyproject.toml ./backend/
+RUN pip install --no-cache-dir -e ./backend
+
+# Copy backend application source code
+COPY backend/ ./backend/
+
+# Copy built frontend static files to /app/static
+COPY --from=frontend-builder /app/web/dist /app/static
+
+EXPOSE 8000
+
+# Run FastAPI uvicorn server on single worker (rate limiter & child MCP are per-process)
+CMD ["sh", "-c", "python -m uvicorn brain_api.main:app --host 0.0.0.0 --port ${PORT:-8000} --workers 1"]

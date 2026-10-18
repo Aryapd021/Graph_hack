@@ -1,0 +1,372 @@
+{
+  "teams": [
+    {
+      "id": "t_platform",
+      "display": "Platform"
+    },
+    {
+      "id": "t_core",
+      "display": "Core"
+    },
+    {
+      "id": "t_developer_experience",
+      "display": "Developer Experience"
+    },
+    {
+      "id": "t_reliability",
+      "display": "Reliability"
+    }
+  ],
+  "members": [
+    {
+      "team_id": "t_platform",
+      "person_id": "p_00777424"
+    },
+    {
+      "team_id": "t_core",
+      "person_id": "p_02ad08f7"
+    },
+    {
+      "team_id": "t_developer_experience",
+      "person_id": "p_0b37409a"
+    },
+    {
+      "team_id": "t_reliability",
+      "person_id": "p_10a3cceb"
+    },
+    {
+      "team_id": "t_platform",
+      "person_id": "p_1a6a19bc"
+    },
+    {
+      "team_id": "t_core",
+      "person_id": "p_1da23a1e"
+    },
+    {
+      "team_id": "t_developer_experience",
+      "person_id": "p_1da28146"
+    },
+    {
+      "team_id": "t_reliability",
+      "person_id": "p_2265fdb8"
+    },
+    {
+      "team_id": "t_platform",
+      "person_id": "p_246f8695"
+    },
+    {
+      "team_id": "t_core",
+      "person_id": "p_29fb1f19"
+    },
+    {
+      "team_id": "t_developer_experience",
+      "person_id": "p_2e7819a5"
+    },
+    {
+      "team_id": "t_reliability",
+      "person_id": "p_336e0e46"
+    },
+    {
+      "team_id": "t_platform",
+      "person_id": "p_337d84ad"
+    },
+    {
+      "team_id": "t_core",
+      "person_id": "p_381cc471"
+    },
+    {
+      "team_id": "t_developer_experience",
+      "person_id": "p_3979baeb"
+    },
+    {
+      "team_id": "t_reliability",
+      "person_id": "p_4668478a"
+    },
+    {
+      "team_id": "t_platform",
+      "person_id": "p_4ae87de6"
+    },
+    {
+      "team_id": "t_core",
+      "person_id": "p_4d2bad5b"
+    },
+    {
+      "team_id": "t_developer_experience",
+      "person_id": "p_4e0d6032"
+    },
+    {
+      "team_id": "t_reliability",
+      "person_id": "p_575023bd"
+    },
+    {
+      "team_id": "t_platform",
+      "person_id": "p_587feedc"
+    },
+    {
+      "team_id": "t_core",
+      "person_id": "p_5e7ef223"
+    },
+    {
+      "team_id": "t_developer_experience",
+      "person_id": "p_5f554eb0"
+    },
+    {
+      "team_id": "t_reliability",
+      "person_id": "p_63e72812"
+    },
+    {
+      "team_id": "t_platform",
+      "person_id": "p_67d52b4a"
+    },
+    {
+      "team_id": "t_core",
+      "person_id": "p_6a08b8bb"
+    },
+    {
+      "team_id": "t_developer_experience",
+      "person_id": "p_6c50ed8c"
+    },
+    {
+      "team_id": "t_reliability",
+      "person_id": "p_6ed8b165"
+    },
+    {
+      "team_id": "t_platform",
+      "person_id": "p_74571562"
+    },
+    {
+      "team_id": "t_core",
+      "person_id": "p_80213f74"
+    },
+    {
+      "team_id": "t_developer_experience",
+      "person_id": "p_825dd91b"
+    },
+    {
+      "team_id": "t_reliability",
+      "person_id": "p_86521ca0"
+    },
+    {
+      "team_id": "t_platform",
+      "person_id": "p_8a446ea0"
+    },
+    {
+      "team_id": "t_core",
+      "person_id": "p_8cc64e8c"
+    },
+    {
+      "team_id": "t_developer_experience",
+      "person_id": "p_8e647083"
+    },
+    {
+      "team_id": "t_reliability",
+      "person_id": "p_92d269f9"
+    },
+    {
+      "team_id": "t_platform",
+      "person_id": "p_95d3f0cf"
+    },
+    {
+      "team_id": "t_core",
+      "person_id": "p_9b34af6c"
+    },
+    {
+      "team_id": "t_developer_experience",
+      "person_id": "p_a2f63251"
+    },
+    {
+      "team_id": "t_reliability",
+      "person_id": "p_aba3c527"
+    },
+    {
+      "team_id": "t_platform",
+      "person_id": "p_abd05377"
+    },
+    {
+      "team_id": "t_core",
+      "person_id": "p_aef602ed"
+    },
+    {
+      "team_id": "t_developer_experience",
+      "person_id": "p_b070a152"
+    },
+    {
+      "team_id": "t_reliability",
+      "person_id": "p_b34e562d"
+    },
+    {
+      "team_id": "t_platform",
+      "person_id": "p_b8dbc52b"
+    },
+    {
+      "team_id": "t_core",
+      "person_id": "p_bc6eb748"
+    },
+    {
+      "team_id": "t_developer_experience",
+      "person_id": "p_be2e1c6a"
+    },
+    {
+      "team_id": "t_reliability",
+      "person_id": "p_c0f2051d"
+    },
+    {
+      "team_id": "t_platform",
+      "person_id": "p_c7d68d84"
+    },
+    {
+      "team_id": "t_core",
+      "person_id": "p_c9209aa1"
+    },
+    {
+      "team_id": "t_developer_experience",
+      "person_id": "p_d0121fdb"
+    },
+    {
+      "team_id": "t_reliability",
+      "person_id": "p_d04a0b32"
+    },
+    {
+      "team_id": "t_platform",
+      "person_id": "p_d4928ba9"
+    },
+    {
+      "team_id": "t_core",
+      "person_id": "p_e29c67fe"
+    },
+    {
+      "team_id": "t_developer_experience",
+      "person_id": "p_e3d447e5"
+    },
+    {
+      "team_id": "t_reliability",
+      "person_id": "p_e421e83f"
+    },
+    {
+      "team_id": "t_platform",
+      "person_id": "p_ec06813a"
+    },
+    {
+      "team_id": "t_core",
+      "person_id": "p_ec4091ee"
+    },
+    {
+      "team_id": "t_developer_experience",
+      "person_id": "p_f0457084"
+    },
+    {
+      "team_id": "t_reliability",
+      "person_id": "p_f37e6739"
+    }
+  ],
+  "owns": [
+    {
+      "team_id": "t_platform",
+      "module_id": "m_docs_en_docs"
+    },
+    {
+      "team_id": "t_core",
+      "module_id": "m_docs_en_docs_about"
+    },
+    {
+      "team_id": "t_developer_experience",
+      "module_id": "m_docs_en_docs_advanced"
+    },
+    {
+      "team_id": "t_reliability",
+      "module_id": "m_docs_en_docs_css"
+    },
+    {
+      "team_id": "t_platform",
+      "module_id": "m_docs_en_docs_deployment"
+    },
+    {
+      "team_id": "t_core",
+      "module_id": "m_docs_en_docs_how-to"
+    },
+    {
+      "team_id": "t_developer_experience",
+      "module_id": "m_docs_en_docs_img"
+    },
+    {
+      "team_id": "t_reliability",
+      "module_id": "m_docs_en_docs_js"
+    },
+    {
+      "team_id": "t_platform",
+      "module_id": "m_docs_en_docs_learn"
+    },
+    {
+      "team_id": "t_core",
+      "module_id": "m_docs_en_docs_reference"
+    },
+    {
+      "team_id": "t_developer_experience",
+      "module_id": "m_docs_en_docs_resources"
+    },
+    {
+      "team_id": "t_reliability",
+      "module_id": "m_docs_en_docs_tutorial"
+    },
+    {
+      "team_id": "t_platform",
+      "module_id": "m_fastapi"
+    },
+    {
+      "team_id": "t_core",
+      "module_id": "m_fastapi_.agents"
+    },
+    {
+      "team_id": "t_developer_experience",
+      "module_id": "m_fastapi__compat"
+    },
+    {
+      "team_id": "t_reliability",
+      "module_id": "m_fastapi_dependencies"
+    },
+    {
+      "team_id": "t_platform",
+      "module_id": "m_fastapi_middleware"
+    },
+    {
+      "team_id": "t_core",
+      "module_id": "m_fastapi_openapi"
+    },
+    {
+      "team_id": "t_developer_experience",
+      "module_id": "m_fastapi_security"
+    },
+    {
+      "team_id": "t_reliability",
+      "module_id": "m_tests"
+    },
+    {
+      "team_id": "t_platform",
+      "module_id": "m_tests_benchmarks"
+    },
+    {
+      "team_id": "t_core",
+      "module_id": "m_tests_test_filter_pydantic_sub_model"
+    },
+    {
+      "team_id": "t_developer_experience",
+      "module_id": "m_tests_test_modules_same_name_body"
+    },
+    {
+      "team_id": "t_reliability",
+      "module_id": "m_tests_test_pydantic_v1_v2_multifile"
+    },
+    {
+      "team_id": "t_platform",
+      "module_id": "m_tests_test_request_params"
+    },
+    {
+      "team_id": "t_core",
+      "module_id": "m_tests_test_tutorial"
+    },
+    {
+      "team_id": "t_developer_experience",
+      "module_id": "m_tests_test_validate_response_recursive"
+    }
+  ]
+}

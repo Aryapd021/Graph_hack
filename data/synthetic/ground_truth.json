@@ -1,0 +1,65 @@
+{
+  "threshold": 1,
+  "decisions": [
+    {
+      "id": "dec_001",
+      "freshness": "superseded",
+      "drift_count": 56
+    },
+    {
+      "id": "dec_002",
+      "freshness": "superseded",
+      "drift_count": 19
+    },
+    {
+      "id": "dec_003",
+      "freshness": "stale",
+      "drift_count": 58
+    },
+    {
+      "id": "dec_004",
+      "freshness": "stale",
+      "drift_count": 81
+    },
+    {
+      "id": "dec_005",
+      "freshness": "stale",
+      "drift_count": 40
+    },
+    {
+      "id": "dec_006",
+      "freshness": "fresh",
+      "drift_count": 0
+    },
+    {
+      "id": "dec_007",
+      "freshness": "stale",
+      "drift_count": 44
+    },
+    {
+      "id": "dec_008",
+      "freshness": "stale",
+      "drift_count": 8
+    },
+    {
+      "id": "dec_009",
+      "freshness": "fresh",
+      "drift_count": 0
+    },
+    {
+      "id": "dec_010",
+      "freshness": "stale",
+      "drift_count": 13
+    },
+    {
+      "id": "dec_011",
+      "freshness": "fresh",
+      "drift_count": 0
+    },
+    {
+      "id": "dec_012",
+      "freshness": "fresh",
+      "drift_count": 0
+    }
+  ]
+}

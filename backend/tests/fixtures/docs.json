@@ -1,0 +1,10 @@
+[
+  {
+    "path": "docs/en/docs/index.md",
+    "title": "FastAPI Index",
+    "kind": "guide",
+    "updated_at": 1700020000,
+    "body": "# FastAPI\nLearn all about fastapi and fastapi routing.",
+    "url": "https://github.com/fastapi/fastapi/blob/master/docs/en/docs/index.md"
+  }
+]

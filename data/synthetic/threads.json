@@ -1,0 +1,369 @@
+[
+  {
+    "id": "th_001",
+    "display": "#eng-decisions: Discussion on Standardize error handling and exception formatting in docs/en/docs",
+    "channel": "#eng-decisions",
+    "started_at": 1753349742,
+    "text": "Contributor 00777424: Hey team, we've observed repeated performance degradation in docs/en/docs during peak traffic.\n\nContributor 1a6a19bc: I agree with Contributor a2f63251. We need a formal architectural decision to standardize how docs/en/docs operates.\n\nContributor a2f63251: Has anyone benchmarked the trade-offs of refactoring docs/en/docs versus keeping backwards compatibility?",
+    "participants": [
+      "p_00777424",
+      "p_1a6a19bc",
+      "p_a2f63251",
+      "p_b8dbc52b"
+    ],
+    "mentions": [
+      "m_docs_en_docs"
+    ]
+  },
+  {
+    "id": "th_002",
+    "display": "#eng-decisions: Discussion on Migrate configuration parameters to environment variables in docs/en/docs/advanced",
+    "channel": "#eng-decisions",
+    "started_at": 1756367947,
+    "text": "Contributor 2e7819a5: I agree with Contributor d4928ba9. We need a formal architectural decision to standardize how docs/en/docs/advanced operates.\n\nContributor d4928ba9: Has anyone benchmarked the trade-offs of refactoring docs/en/docs/advanced versus keeping backwards compatibility?\n\nContributor 2e7819a5: I ran initial benchmarks in staging; refactoring docs/en/docs/advanced yields a 35% latency improvement without breaking existing contracts.",
+    "participants": [
+      "p_2e7819a5",
+      "p_d4928ba9"
+    ],
+    "mentions": [
+      "m_docs_en_docs_advanced"
+    ]
+  },
+  {
+    "id": "th_003",
+    "display": "#eng-decisions: Discussion on Deprecate legacy synchronous interfaces in fastapi/dependencies",
+    "channel": "#eng-decisions",
+    "started_at": 1758122753,
+    "text": "Contributor 2265fdb8: Has anyone benchmarked the trade-offs of refactoring fastapi/dependencies versus keeping backwards compatibility?\n\nContributor 92d269f9: I ran initial benchmarks in staging; refactoring fastapi/dependencies yields a 35% latency improvement without breaking existing contracts.\n\nContributor c0f2051d: Let's make sure the proposed changes for fastapi/dependencies are tracked with an explicit decision record.\n\nContributor d04a0b32: The proposed design looks solid. Contributor d04a0b32, could you submit the PR and link it to this discussion?",
+    "participants": [
+      "p_2265fdb8",
+      "p_92d269f9",
+      "p_c0f2051d",
+      "p_d04a0b32"
+    ],
+    "mentions": [
+      "m_fastapi_dependencies",
+      "m_tests"
+    ]
+  },
+  {
+    "id": "th_004",
+    "display": "#eng-decisions: Discussion on Implement structured request lifecycle telemetry in tests",
+    "channel": "#eng-decisions",
+    "started_at": 1760107554,
+    "text": "Contributor 02ad08f7: I ran initial benchmarks in staging; refactoring tests yields a 35% latency improvement without breaking existing contracts.\n\nContributor 10a3cceb: Let's make sure the proposed changes for tests are tracked with an explicit decision record.\n\nContributor 02ad08f7: The proposed design looks solid. Contributor 02ad08f7, could you submit the PR and link it to this discussion?",
+    "participants": [
+      "p_02ad08f7",
+      "p_10a3cceb"
+    ],
+    "mentions": [
+      "m_tests",
+      "m_fastapi"
+    ]
+  },
+  {
+    "id": "th_005",
+    "display": "#eng-decisions: Discussion on Enforce strict schema validation rules in fastapi/dependencies",
+    "channel": "#eng-decisions",
+    "started_at": 1764383995,
+    "text": "Contributor 80213f74: Let's make sure the proposed changes for fastapi/dependencies are tracked with an explicit decision record.\n\nContributor 92d269f9: The proposed design looks solid. Contributor 80213f74, could you submit the PR and link it to this discussion?\n\nContributor 80213f74: We should also review how this affects downstream consumers that depend on fastapi/dependencies.",
+    "participants": [
+      "p_80213f74",
+      "p_92d269f9"
+    ],
+    "mentions": [
+      "m_fastapi_dependencies",
+      "m_tests"
+    ]
+  },
+  {
+    "id": "th_006",
+    "display": "#eng-decisions: Discussion on Refactor dependency injection graph for tests/benchmarks",
+    "channel": "#eng-decisions",
+    "started_at": 1765797849,
+    "text": "Contributor 02ad08f7: The proposed design looks solid. Contributor 02ad08f7, could you submit the PR and link it to this discussion?\n\nContributor 337d84ad: We should also review how this affects downstream consumers that depend on tests/benchmarks.\n\nContributor abd05377: Agreed. I've updated the documentation and verified that the test suite covers the new invariants for tests/benchmarks.\n\nContributor b8dbc52b: Thanks everyone for the feedback. I will finalize the decision record and open the tracking ticket.\n\nContributor 02ad08f7: Looks good to merge from my side. Let's monitor telemetry once the changes in tests/benchmarks hit production.",
+    "participants": [
+      "p_02ad08f7",
+      "p_337d84ad",
+      "p_abd05377",
+      "p_b8dbc52b"
+    ],
+    "mentions": [
+      "m_tests_benchmarks"
+    ]
+  },
+  {
+    "id": "th_007",
+    "display": "#eng-decisions: Discussion on Optimize serialization and payload parsing in fastapi",
+    "channel": "#eng-decisions",
+    "started_at": 1770388317,
+    "text": "Contributor 1da23a1e: We should also review how this affects downstream consumers that depend on fastapi.\n\nContributor 337d84ad: Agreed. I've updated the documentation and verified that the test suite covers the new invariants for fastapi.\n\nContributor 74571562: Thanks everyone for the feedback. I will finalize the decision record and open the tracking ticket.\n\nContributor 1da23a1e: Looks good to merge from my side. Let's monitor telemetry once the changes in fastapi hit production.",
+    "participants": [
+      "p_1da23a1e",
+      "p_337d84ad",
+      "p_74571562"
+    ],
+    "mentions": [
+      "m_fastapi",
+      "m_tests"
+    ]
+  },
+  {
+    "id": "th_008",
+    "display": "#eng-decisions: Discussion on Adopt granular permission scoping across fastapi/security",
+    "channel": "#eng-decisions",
+    "started_at": 1773562608,
+    "text": "Contributor 74571562: Agreed. I've updated the documentation and verified that the test suite covers the new invariants for fastapi/security.\n\nContributor d0121fdb: Thanks everyone for the feedback. I will finalize the decision record and open the tracking ticket.\n\nContributor 74571562: Looks good to merge from my side. Let's monitor telemetry once the changes in fastapi/security hit production.\n\nContributor d0121fdb: Hey team, we've observed repeated performance degradation in fastapi/security during peak traffic.\n\nContributor 74571562: I agree with Contributor 74571562. We need a formal architectural decision to standardize how fastapi/security operates.",
+    "participants": [
+      "p_74571562",
+      "p_d0121fdb"
+    ],
+    "mentions": [
+      "m_fastapi_security",
+      "m_tests"
+    ]
+  },
+  {
+    "id": "th_009",
+    "display": "#eng-decisions: Discussion on Isolate connection pooling and retry policies in docs/en/docs/advanced",
+    "channel": "#eng-decisions",
+    "started_at": 1784831372,
+    "text": "Contributor 1da23a1e: Thanks everyone for the feedback. I will finalize the decision record and open the tracking ticket.\n\nContributor 4e0d6032: Looks good to merge from my side. Let's monitor telemetry once the changes in docs/en/docs/advanced hit production.\n\nContributor 5f554eb0: Hey team, we've observed repeated performance degradation in docs/en/docs/advanced during peak traffic.",
+    "participants": [
+      "p_1da23a1e",
+      "p_4e0d6032",
+      "p_5f554eb0"
+    ],
+    "mentions": [
+      "m_docs_en_docs_advanced",
+      "m_docs_en_docs_tutorial"
+    ]
+  },
+  {
+    "id": "th_010",
+    "display": "#eng-decisions: Discussion on Implement idempotent state transitions in docs/en/docs",
+    "channel": "#eng-decisions",
+    "started_at": 1785054591,
+    "text": "Contributor 02ad08f7: Looks good to merge from my side. Let's monitor telemetry once the changes in docs/en/docs hit production.\n\nContributor 1a6a19bc: Hey team, we've observed repeated performance degradation in docs/en/docs during peak traffic.\n\nContributor ec06813a: I agree with Contributor 02ad08f7. We need a formal architectural decision to standardize how docs/en/docs operates.",
+    "participants": [
+      "p_02ad08f7",
+      "p_1a6a19bc",
+      "p_ec06813a"
+    ],
+    "mentions": [
+      "m_docs_en_docs",
+      "m_fastapi"
+    ]
+  },
+  {
+    "id": "th_011",
+    "display": "#eng-decisions: Discussion on Standardize pagination semantics and metadata in docs/en/docs/reference",
+    "channel": "#eng-decisions",
+    "started_at": 1784984901,
+    "text": "Contributor 381cc471: Hey team, we've observed repeated performance degradation in docs/en/docs/reference during peak traffic.\n\nContributor 6a08b8bb: I agree with Contributor 381cc471. We need a formal architectural decision to standardize how docs/en/docs/reference operates.\n\nContributor ec4091ee: Has anyone benchmarked the trade-offs of refactoring docs/en/docs/reference versus keeping backwards compatibility?\n\nContributor 381cc471: I ran initial benchmarks in staging; refactoring docs/en/docs/reference yields a 35% latency improvement without breaking existing contracts.",
+    "participants": [
+      "p_381cc471",
+      "p_6a08b8bb",
+      "p_ec4091ee"
+    ],
+    "mentions": [
+      "m_docs_en_docs_reference"
+    ]
+  },
+  {
+    "id": "th_012",
+    "display": "#eng-decisions: Discussion on Enhance cache invalidation coordination for docs/en/docs",
+    "channel": "#eng-decisions",
+    "started_at": 1785165338,
+    "text": "Contributor 02ad08f7: I agree with Contributor 02ad08f7. We need a formal architectural decision to standardize how docs/en/docs operates.\n\nContributor b8dbc52b: Has anyone benchmarked the trade-offs of refactoring docs/en/docs versus keeping backwards compatibility?\n\nContributor 02ad08f7: I ran initial benchmarks in staging; refactoring docs/en/docs yields a 35% latency improvement without breaking existing contracts.\n\nContributor b8dbc52b: Let's make sure the proposed changes for docs/en/docs are tracked with an explicit decision record.\n\nContributor 02ad08f7: The proposed design looks solid. Contributor 02ad08f7, could you submit the PR and link it to this discussion?",
+    "participants": [
+      "p_02ad08f7",
+      "p_b8dbc52b"
+    ],
+    "mentions": [
+      "m_docs_en_docs",
+      "m_fastapi"
+    ]
+  },
+  {
+    "id": "th_013",
+    "display": "#dev-chat: Sync on docs/en/docs",
+    "channel": "#dev-chat",
+    "started_at": 1753522542,
+    "text": "Contributor ec06813a: Hey team, we've observed repeated performance degradation in docs/en/docs during peak traffic.\n\nContributor 67d52b4a: I agree with Contributor ec06813a. We need a formal architectural decision to standardize how docs/en/docs operates.\n\nContributor ec06813a: Has anyone benchmarked the trade-offs of refactoring docs/en/docs versus keeping backwards compatibility?",
+    "participants": [
+      "p_ec06813a",
+      "p_67d52b4a"
+    ],
+    "mentions": [
+      "m_docs_en_docs"
+    ]
+  },
+  {
+    "id": "th_014",
+    "display": "#architecture: Sync on docs/en/docs/about",
+    "channel": "#architecture",
+    "started_at": 1753522562,
+    "text": "Contributor 4d2bad5b: I agree with Contributor 4d2bad5b. We need a formal architectural decision to standardize how docs/en/docs/about operates.\n\nContributor e29c67fe: Has anyone benchmarked the trade-offs of refactoring docs/en/docs/about versus keeping backwards compatibility?\n\nContributor aef602ed: I ran initial benchmarks in staging; refactoring docs/en/docs/about yields a 35% latency improvement without breaking existing contracts.\n\nContributor 9b34af6c: Let's make sure the proposed changes for docs/en/docs/about are tracked with an explicit decision record.",
+    "participants": [
+      "p_4d2bad5b",
+      "p_e29c67fe",
+      "p_aef602ed",
+      "p_9b34af6c"
+    ],
+    "mentions": [
+      "m_docs_en_docs_about"
+    ]
+  },
+  {
+    "id": "th_015",
+    "display": "#dev-chat: Sync on docs/en/docs/advanced",
+    "channel": "#dev-chat",
+    "started_at": 1753549094,
+    "text": "Contributor 3979baeb: Has anyone benchmarked the trade-offs of refactoring docs/en/docs/advanced versus keeping backwards compatibility?\n\nContributor be2e1c6a: I ran initial benchmarks in staging; refactoring docs/en/docs/advanced yields a 35% latency improvement without breaking existing contracts.\n\nContributor 1da28146: Let's make sure the proposed changes for docs/en/docs/advanced are tracked with an explicit decision record.\n\nContributor 0b37409a: The proposed design looks solid. Contributor 3979baeb, could you submit the PR and link it to this discussion?\n\nContributor 3979baeb: We should also review how this affects downstream consumers that depend on docs/en/docs/advanced.",
+    "participants": [
+      "p_3979baeb",
+      "p_be2e1c6a",
+      "p_1da28146",
+      "p_0b37409a"
+    ],
+    "mentions": [
+      "m_docs_en_docs_advanced"
+    ]
+  },
+  {
+    "id": "th_016",
+    "display": "#architecture: Sync on docs/en/docs/css",
+    "channel": "#architecture",
+    "started_at": 1753557569,
+    "text": "Contributor d04a0b32: I ran initial benchmarks in staging; refactoring docs/en/docs/css yields a 35% latency improvement without breaking existing contracts.\n\nContributor 575023bd: Let's make sure the proposed changes for docs/en/docs/css are tracked with an explicit decision record.\n\nContributor d04a0b32: The proposed design looks solid. Contributor d04a0b32, could you submit the PR and link it to this discussion?",
+    "participants": [
+      "p_d04a0b32",
+      "p_575023bd"
+    ],
+    "mentions": [
+      "m_docs_en_docs_css"
+    ]
+  },
+  {
+    "id": "th_017",
+    "display": "#dev-chat: Sync on docs/en/docs/deployment",
+    "channel": "#dev-chat",
+    "started_at": 1753558078,
+    "text": "Contributor d4928ba9: Let's make sure the proposed changes for docs/en/docs/deployment are tracked with an explicit decision record.\n\nContributor 1a6a19bc: The proposed design looks solid. Contributor d4928ba9, could you submit the PR and link it to this discussion?\n\nContributor d4928ba9: We should also review how this affects downstream consumers that depend on docs/en/docs/deployment.\n\nContributor 1a6a19bc: Agreed. I've updated the documentation and verified that the test suite covers the new invariants for docs/en/docs/deployment.",
+    "participants": [
+      "p_d4928ba9",
+      "p_1a6a19bc"
+    ],
+    "mentions": [
+      "m_docs_en_docs_deployment"
+    ]
+  },
+  {
+    "id": "th_018",
+    "display": "#architecture: Sync on docs/en/docs/how-to",
+    "channel": "#architecture",
+    "started_at": 1753636359,
+    "text": "Contributor 80213f74: The proposed design looks solid. Contributor 80213f74, could you submit the PR and link it to this discussion?\n\nContributor aef602ed: We should also review how this affects downstream consumers that depend on docs/en/docs/how-to.\n\nContributor 5e7ef223: Agreed. I've updated the documentation and verified that the test suite covers the new invariants for docs/en/docs/how-to.",
+    "participants": [
+      "p_80213f74",
+      "p_aef602ed",
+      "p_5e7ef223"
+    ],
+    "mentions": [
+      "m_docs_en_docs_how-to"
+    ]
+  },
+  {
+    "id": "th_019",
+    "display": "#dev-chat: Sync on docs/en/docs/img",
+    "channel": "#dev-chat",
+    "started_at": 1753653138,
+    "text": "Contributor 5f554eb0: We should also review how this affects downstream consumers that depend on docs/en/docs/img.\n\nContributor 3979baeb: Agreed. I've updated the documentation and verified that the test suite covers the new invariants for docs/en/docs/img.\n\nContributor b070a152: Thanks everyone for the feedback. I will finalize the decision record and open the tracking ticket.\n\nContributor 5f554eb0: Looks good to merge from my side. Let's monitor telemetry once the changes in docs/en/docs/img hit production.",
+    "participants": [
+      "p_5f554eb0",
+      "p_3979baeb",
+      "p_b070a152"
+    ],
+    "mentions": [
+      "m_docs_en_docs_img"
+    ]
+  },
+  {
+    "id": "th_020",
+    "display": "#architecture: Sync on docs/en/docs/js",
+    "channel": "#architecture",
+    "started_at": 1753726699,
+    "text": "Contributor f37e6739: Agreed. I've updated the documentation and verified that the test suite covers the new invariants for docs/en/docs/js.\n\nContributor b34e562d: Thanks everyone for the feedback. I will finalize the decision record and open the tracking ticket.\n\nContributor e421e83f: Looks good to merge from my side. Let's monitor telemetry once the changes in docs/en/docs/js hit production.\n\nContributor 2265fdb8: Hey team, we've observed repeated performance degradation in docs/en/docs/js during peak traffic.\n\nContributor f37e6739: I agree with Contributor f37e6739. We need a formal architectural decision to standardize how docs/en/docs/js operates.",
+    "participants": [
+      "p_f37e6739",
+      "p_b34e562d",
+      "p_e421e83f",
+      "p_2265fdb8"
+    ],
+    "mentions": [
+      "m_docs_en_docs_js"
+    ]
+  },
+  {
+    "id": "th_021",
+    "display": "#dev-chat: Sync on docs/en/docs/learn",
+    "channel": "#dev-chat",
+    "started_at": 1753886291,
+    "text": "Contributor 246f8695: Thanks everyone for the feedback. I will finalize the decision record and open the tracking ticket.\n\nContributor 8a446ea0: Looks good to merge from my side. Let's monitor telemetry once the changes in docs/en/docs/learn hit production.\n\nContributor b8dbc52b: Hey team, we've observed repeated performance degradation in docs/en/docs/learn during peak traffic.",
+    "participants": [
+      "p_246f8695",
+      "p_8a446ea0",
+      "p_b8dbc52b",
+      "p_337d84ad"
+    ],
+    "mentions": [
+      "m_docs_en_docs_learn"
+    ]
+  },
+  {
+    "id": "th_022",
+    "display": "#architecture: Sync on docs/en/docs/reference",
+    "channel": "#architecture",
+    "started_at": 1753976875,
+    "text": "Contributor 6a08b8bb: Looks good to merge from my side. Let's monitor telemetry once the changes in docs/en/docs/reference hit production.\n\nContributor 4d2bad5b: Hey team, we've observed repeated performance degradation in docs/en/docs/reference during peak traffic.\n\nContributor aef602ed: I agree with Contributor 6a08b8bb. We need a formal architectural decision to standardize how docs/en/docs/reference operates.\n\nContributor 6a08b8bb: Has anyone benchmarked the trade-offs of refactoring docs/en/docs/reference versus keeping backwards compatibility?\n\nContributor 4d2bad5b: I ran initial benchmarks in staging; refactoring docs/en/docs/reference yields a 35% latency improvement without breaking existing contracts.",
+    "participants": [
+      "p_6a08b8bb",
+      "p_4d2bad5b",
+      "p_aef602ed"
+    ],
+    "mentions": [
+      "m_docs_en_docs_reference"
+    ]
+  },
+  {
+    "id": "th_023",
+    "display": "#dev-chat: Sync on docs/en/docs/resources",
+    "channel": "#dev-chat",
+    "started_at": 1753978869,
+    "text": "Contributor 3979baeb: Hey team, we've observed repeated performance degradation in docs/en/docs/resources during peak traffic.\n\nContributor b070a152: I agree with Contributor 3979baeb. We need a formal architectural decision to standardize how docs/en/docs/resources operates.\n\nContributor 5f554eb0: Has anyone benchmarked the trade-offs of refactoring docs/en/docs/resources versus keeping backwards compatibility?",
+    "participants": [
+      "p_3979baeb",
+      "p_b070a152",
+      "p_5f554eb0",
+      "p_0b37409a"
+    ],
+    "mentions": [
+      "m_docs_en_docs_resources"
+    ]
+  },
+  {
+    "id": "th_024",
+    "display": "#architecture: Sync on docs/en/docs/tutorial",
+    "channel": "#architecture",
+    "started_at": 1754021841,
+    "text": "Contributor d04a0b32: I agree with Contributor d04a0b32. We need a formal architectural decision to standardize how docs/en/docs/tutorial operates.\n\nContributor 63e72812: Has anyone benchmarked the trade-offs of refactoring docs/en/docs/tutorial versus keeping backwards compatibility?\n\nContributor d04a0b32: I ran initial benchmarks in staging; refactoring docs/en/docs/tutorial yields a 35% latency improvement without breaking existing contracts.\n\nContributor 63e72812: Let's make sure the proposed changes for docs/en/docs/tutorial are tracked with an explicit decision record.",
+    "participants": [
+      "p_d04a0b32",
+      "p_63e72812"
+    ],
+    "mentions": [
+      "m_docs_en_docs_tutorial"
+    ]
+  }
+]
