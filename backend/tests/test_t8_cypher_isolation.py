@@ -25,6 +25,8 @@ def test_t8_cypher_isolation():
         re.compile(r'["\'].*?\bMATCH\s+.*__["\']', re.IGNORECASE),
         re.compile(r'["\'].*?\bMERGE\s+.*__["\']', re.IGNORECASE),
         re.compile(r'["\'].*?\bCALL\s+.*__["\']', re.IGNORECASE),
+        re.compile(r'["\'].*?\bCREATE\s+.*__["\']', re.IGNORECASE),
+        re.compile(r'["\'].*?\bUNWIND\s+.*__["\']', re.IGNORECASE),
     ]
 
     target_dirs = [

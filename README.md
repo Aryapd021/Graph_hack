@@ -5,71 +5,64 @@
 
 ---
 
-## 🏆 Track & Problem Statement
+## 🌐 Live Demo URL
 
-Modern software organizations suffer from fragmented institutional memory:
-- **Architectural decisions** rot silently in stale docs, Slack threads, or tickets as codebases evolve.
-- **Decision drift** occurs when PRs modify modules in ways that contradict previous architecture decisions, with zero alerts.
-- **Knowledge silos and ownership gaps** emerge when the contributors writing the code differ from the formal owning team.
-
-**Company Brain** solves this by unifying GitHub code activity, architecture decision records (ADRs), team structures, and communication threads into a high-performance **FalkorDB Knowledge Graph**. An AI agent powered by **Google Gemini** connects to FalkorDB via **MCP stdio tools**, answering organizational questions backed strictly by graph evidence with cryptographically verified citations `[[node_id]]`.
+**Live Demo URL:** `TBD (added in B12)`
 
 ---
 
-## 🌟 Key Highlights & Innovations
+## 💡 What It Does
 
-1. **FalkorDB as Primary Graph Database & Vector Engine**:
-   - Stores 10 node labels and 18 relationship types in a single cohesive property graph.
-   - Leverages FalkorDB's native vector index (`db.idx.vector.queryNodes`) with 3072-dimensional cosine similarity embeddings for hybrid semantic search.
-   - Executes graph algorithms (PageRank via `algo.pageRank` for collaboration centrality and `shortestPath` for provenance tracing).
-   - **FalkorDB is strictly required**: Test `test_t5_degradation.py` proves the application gracefully degrades with `503 GRAPH_UNAVAILABLE` if FalkorDB is offline.
+Company Brain unifies GitHub code activity, architecture decision records (ADRs), team structures, and communication threads into a high-performance **FalkorDB Knowledge Graph**. Powered by **Google Gemini** via **MCP stdio tools**, it delivers 5 core capabilities:
 
-2. **Autonomous Tool Reasoning via Model Context Protocol (MCP)**:
-   - Built on the official Python `mcp` SDK using FastMCP over stdio transport.
-   - Exposes 11 specialized graph analysis tools (`who_owns`, `who_knows`, `check_decision_freshness`, `trace_decision`, `list_stale_decisions`, `recent_changes`, `connection_path`, `key_connectors`, `search_knowledge`, `get_decision`, `flag_for_review`).
-   - Self-healing child process with auto-restart on crashes.
+1. **Who Owns (`who_owns`)**: Identifies the formal owning team of any codebase module alongside de facto contributors, highlighting ownership gaps where active coders differ from the formal team.
+2. **Who Knows (`who_knows`)**: Locates subject-matter experts for any topic or module using weighted graph scoring across merged PRs, Slack/Discord discussions, and authored architecture decisions.
+3. **Why Did We Decide (`get_decision`, `trace_decision`)**: Traces the full provenance chain, historical rationale, and linked PRs, tickets, and docs behind key architecture decisions.
+4. **Is That Decision Still Valid (`check_decision_freshness`, `list_stale_decisions`)**: Derives decision drift dynamically at query time by counting subsequent merged PRs touching affected modules.
+5. **Flag for Review (`flag_for_review`)**: Writes back to the graph by creating a `ReviewRequest` node linked to the decision and automatically assigned to the original decider.
 
-3. **Cryptographically Grounded Citation Verification**:
-   - The agent is constrained by a strict verification harness: every factual statement must cite `[[node_id]]`.
-   - The server validates markers against actual tool evidence gathered during that turn, discarding hallucinated IDs before sending answers to the UI.
+Every factual response terminates in cryptographically verified citations `[[node_id]]` validated against tool evidence gathered during that turn.
 
-4. **Dynamic Decision Freshness & PR Drift Simulation**:
-   - Freshness is never a stale boolean; it is derived at query time based on subsequent merged PRs touching affected modules.
-   - Live demo controls allow simulating a merged PR to watch a decision instantly flip from `fresh` to `stale` in real-time.
+---
+
+## ⚡ Why the Graph Matters (FalkorDB Dependency)
+
+**The product stops working without FalkorDB.** Company Brain is not a naive RAG wrapper with an optional cache; its reasoning capabilities depend fundamentally on graph topology:
+
+- **Graph Algorithms at the Core**: Contributor centrality relies on native matrix PageRank (`algo.pageRank`), while provenance and organizational bridges require graph traversal (`shortestPath`).
+- **Dynamic Decision Freshness**: Drift is computed directly in Cypher (`Q08`) across multi-hop paths `(:Decision)-[:AFFECTS]->(:Module)<-[:PART_OF]-(:File)<-[:TOUCHES]-(:PR)`.
+- **Hybrid Vector Indexing**: 3072-dimensional cosine similarity embeddings are indexed directly in FalkorDB (`db.idx.vector.queryNodes`) for semantic retrieval.
+- **Proof of Dependency (Test T5)**: Automated test [`backend/tests/test_t5_degradation.py`](backend/tests/test_t5_degradation.py) proves that when FalkorDB is stopped or unreachable, `/api/health` reports `status: "degraded"` (`falkordb: false`), and all agent and data endpoints fail safely with `503 GRAPH_UNAVAILABLE`.
 
 ---
 
 ## 🏗️ Architecture Overview
 
+The system architecture follows Section 3 of `ARCHITECTURE.md`:
+
 ```
-                                  +------------------------------------+
-                                  |            Frontend UI             |
-                                  |    React 18 + Vite + Tailwind     |
-                                  |   Cytoscape Graph + Chat Panel    |
-                                  +-----------------+------------------+
-                                                    |  /api/* (Relative)
-                                                    v
-                                  +------------------------------------+
-                                  |          FastAPI Gateway           |
-                                  |   Error Normalization + Rate Limit |
-                                  |   Lifespan Watchdog & REST Routes  |
-                                  +--------+------------------+--------+
-                                           |                  |
-                       Direct Cypher /     |                  | StdIO JSON-RPC
-                       Read Services       |                  |
-                                           v                  v
-+-----------------------+         +----------------+   +---------------+
-|   Google GenAI SDK    | <=====> |  Agent Loop    |   |  MCP Server   |
-| Gemini 3.5 Flash-Lite |         | (Multi-turn)   |   | (11 FastMCP   |
-|   Function Calling    |         | Citation Filter|   |    Tools)     |
-+-----------------------+         +----------------+   +-------+-------+
-                                                               |
-                                                               v
-                                    +----------------------------------+
-                                    |        FalkorDB Graph Core       |
-                                    |     Knowledge Graph + Vector     |
-                                    |   PageRank + Shortest Paths      |
-                                    +----------------------------------+
+                           +----------------------+
+ Browser (React/Vite) ---> | nginx :8080          |  /api/* -> api:8000, else static SPA
+                           +----------+-----------+
+                                      |
+                           +----------v-----------+      stdio (spawned child)      +------------------+
+                           | FastAPI "brain_api"  | <-----------------------------> | MCP server       |
+                           |  - REST routes       |   MCP tools/list, tools/call    | "mcp_server"     |
+                           |  - Agent loop        |                                 |  11 tools        |
+                           |    (Gemini function  |                                 +---------+--------+
+                           |     calling)         |                                           |
+                           +----------+-----------+                                           |
+                                      | brain_core (queries, services, freshness)             |
+                                      +----------------------+--------------------------------+
+                                                             v
+                                                  +----------------------+
+                                                  | FalkorDB :6379       |  browser UI :3000 (debug only)
+                                                  +----------^-----------+
+                                                             |
+                                  +--------------------------+------------------+
+                                  | ingest CLI (python -m ingest ...)           |
+                                  | GitHub REST -> cache -> graph; synthetic gen |
+                                  +---------------------------------------------+
 ```
 
 ---
@@ -93,170 +86,134 @@ Modern software organizations suffer from fragmented institutional memory:
 
 ### Relationships (18 Types)
 
-- `(:Person)-[:MEMBER_OF]->(:Team)`
-- `(:Team)-[:OWNS]->(:Module)`
-- `(:Person)-[:AUTHORED]->(:PR)`
-- `(:PR)-[:TOUCHES]->(:File)`
-- `(:File)-[:PART_OF]->(:Module)`
-- `(:Person)-[:PARTICIPATED_IN]->(:Thread)`
-- `(:Ticket)-[:ASSIGNED_TO]->(:Person)`
-- `(:PR)-[:RESOLVES]->(:Ticket)`
-- `(:Decision)-[:DECIDED_BY]->(:Person)`
-- `(:Decision)-[:AFFECTS]->(:Module)`
-- `(:PR)-[:IMPLEMENTS]->(:Decision)`
-- `(:Decision)-[:DOCUMENTED_IN]->(:Doc)`
-- `(:Decision)-[:DISCUSSED_IN]->(:Thread)`
-- `(:Decision)-[:TRACKED_BY]->(:Ticket)`
-- `(:Decision)-[:SUPERSEDED_BY]->(:Decision)`
-- `(:Thread\|Doc)-[:MENTIONS]->(:Module)`
-- `(:Person)-[:COLLABORATES_WITH {weight}]->(:Person)` *(derived from shared module PRs)*
-- `(:ReviewRequest)-[:REVIEWS]->(:Decision)`, `(:ReviewRequest)-[:ASSIGNED_TO]->(:Person)`
-
-### Graph Indexes & Constraints
-- **Range Indexes**: `Module(id)`, `File(id)`, `Person(id)`, `PR(id)`, `PR(merged_at)`, `Doc(id)`, `Decision(id)`, `Decision(decided_at)`, `Ticket(id)`, `Thread(id)`, `ReviewRequest(id)`.
-- **Vector Index**: 3072-dimensional vector index with cosine distance on `Doc(embedding)`, `Decision(embedding)`, and `Thread(embedding)`.
+| Relationship Type | Source Label | Target Label | Description |
+|---|---|---|---|
+| `MEMBER_OF` | `Person` | `Team` | Formal team membership |
+| `OWNS` | `Team` | `Module` | Formal codebase ownership |
+| `AUTHORED` | `Person` | `PR` | Pull request authorship |
+| `TOUCHES` | `PR` | `File` | File modifications in a PR |
+| `PART_OF` | `File` | `Module` | File hierarchy within a module |
+| `PARTICIPATED_IN` | `Person` | `Thread` | Discussion engagement |
+| `ASSIGNED_TO` | `Ticket` / `ReviewRequest` | `Person` | Task or review responsibility |
+| `RESOLVES` | `PR` | `Ticket` | Issue resolution by PR |
+| `DECIDED_BY` | `Decision` | `Person` | Architecture decision authority |
+| `AFFECTS` | `Decision` | `Module` | Target module governed by decision |
+| `IMPLEMENTS` | `PR` | `Decision` | Code change realizing a decision |
+| `DOCUMENTED_IN` | `Decision` | `Doc` | Reference documentation link |
+| `DISCUSSED_IN` | `Decision` | `Thread` | Communication channel discussion |
+| `TRACKED_BY` | `Decision` | `Ticket` | Project management tracking |
+| `SUPERSEDED_BY` | `Decision` | `Decision` | Successor architectural policy |
+| `MENTIONS` | `Thread` / `Doc` | `Module` | Contextual reference to a component |
+| `COLLABORATES_WITH` | `Person` | `Person` | Co-authorship network (`weight` derived from shared module PRs) |
+| `REVIEWS` | `ReviewRequest` | `Decision` | Pending review link |
 
 ---
 
-## 🛠️ The 11 MCP Tools
+## 🔍 Cypher Queries & Algorithms
 
-| Tool | Purpose | FalkorDB Queries |
-|---|---|---|
-| `search_knowledge` | Hybrid semantic vector search over Decisions, Docs, Threads | `Q04` (Vector index) |
-| `get_decision` | Inspect an ADR with all its linked graph entities | `Q05` |
-| `trace_decision` | Traverse provenance and supersession chains | `Q05`, `Q06`, `Q07`, `Q08` |
-| `check_decision_freshness` | Compute live decision drift and subsequent PRs | `Q05`, `Q08` |
-| `list_stale_decisions` | Find all drifted decisions ordered by drift count | `Q09` |
-| `who_owns` | Formal team ownership vs de facto contributors (ownership gap) | `Q03`, `Q01`, `Q02` |
-| `who_knows` | Identify subject-matter experts using PR, Thread, and ADR scoring | `Q03`, `Q04`, `Q23`, `Q11a-d` |
-| `recent_changes` | List merged PRs touching a module within N days | `Q03`, `Q12` |
-| `connection_path` | Shortest path between any two nodes in the organization | `Q13` (`shortestPath`) |
-| `key_connectors` | Graph centrality using PageRank on collaboration network | `Q14` (`algo.pageRank`) |
-| `flag_for_review` | Create a ReviewRequest linked to a decision and assigned decider | `Q15a-c` |
+All 27 Cypher queries are strictly isolated in [`backend/brain_core/queries.py`](backend/brain_core/queries.py) as named constants `Q01` through `Q27`. Hand-editing of query documentation is prohibited; the registry is generated via `python scripts/gen_queries_doc.py`.
 
-*All 27 Cypher queries are strictly documented in [`docs/queries.md`](docs/queries.md).*
+- Complete Query Reference: [`docs/queries.md`](docs/queries.md)
+- **PageRank Centrality (`Q14`)**: Evaluates influence across the collaboration network (`COLLABORATES_WITH`) using FalkorDB's native matrix algorithm:
+  ```cypher
+  CALL algo.pageRank('Person', 'COLLABORATES_WITH') YIELD node, score
+  RETURN node.id AS id, node.display AS display, score
+  ORDER BY score DESC LIMIT $limit
+  ```
+- **Freshness Rule (`Q08` / `classify`)**: Evaluates subsequent merged PRs touching affected modules. A decision is classified as:
+  - `superseded`: If `(:Decision)-[:SUPERSEDED_BY]->(:Decision)` exists.
+  - `stale`: If count of subsequent PRs where `pr.merged_at > decision.decided_at` AND NOT `(pr)-[:IMPLEMENTS]->(decision)` is $\ge \text{STALE\_PR\_THRESHOLD}$ (default 1).
+  - `fresh`: If drift count is 0.
 
 ---
 
-## 🚀 Local Quickstart Setup
+## 🚀 Local Setup
 
-### Prerequisites
-- Docker & Docker Compose
-- Python 3.11+
-- Node.js 18+ & npm
+Follow Section 18 of `ARCHITECTURE.md`:
 
-### 1. Clone & Configure
 ```bash
-git clone <repo-url>
-cd GRAPH_HACK
+# 1. Clone repository and configure environment
+git clone https://github.com/Aryapd021/Graph_hack.git
+cd Graph_hack
 
-# Copy environment variables
+# Copy template; config.py automatically resolves .env or custom ENV_FILE
 cp .env.example .env
 # Edit .env and supply GEMINI_API_KEY
-```
 
-### 2. Start FalkorDB Container
-```bash
+# 2. Start FalkorDB container
 docker compose up -d falkordb
 python scripts/smoke_falkordb.py
-```
 
-### 3. Ingest Data (GitHub + Synthetic Org Data)
-```bash
-# Ingest snapshot, generate synthetic data, derive collaboration edges, embed vectors
+# 3. Ingest snapshot data & build graph
 cd backend
+pip install -e .
 python -m ingest all
 cd ..
-```
 
-### 4. Run Backend & Frontend
-
-**Backend API:**
-```bash
+# 4. Start backend API & Vite frontend
+# Terminal 1: Backend API
 cd backend
 python -m uvicorn brain_api.main:app --port 8000 --host 127.0.0.1
-```
 
-**Frontend Web App:**
-```bash
+# Terminal 2: Web UI
 cd web
 npm install
 npm run gen:types
 npm run dev
-# Open http://localhost:5173
+# Open http://localhost:5173 (or http://localhost:8080 via Docker Compose)
 ```
+
+> **Note on `ENV_FILE`**: `config.py` searches both current and parent directories for `.env`. To run against FalkorDB Cloud locally without touching `.env`, set `ENV_FILE=.env.cloud`.
 
 ---
 
-## 🧪 Verification & Test Suite
+## ☁️ Deployment
 
-Run the full pytest suite (56 tests across T1 through T8):
+Summarized from Section 18b of `ARCHITECTURE.md`:
+
+- **Topology**: Single-container deployment where FastAPI serves `/api/*` and the static React SPA (`web/dist` mounted at `/`) over a unified origin, connecting to FalkorDB Cloud via TLS.
+- **Production Container**: Built via multi-stage [`Dockerfile`](Dockerfile) (Stage 1: Node 20 builds `web/dist`; Stage 2: Python 3.11-slim installs backend and runs Uvicorn on single worker).
+- **Public Exposure Controls**: `DEMO_MODE=true` enables `/api/demo/*`; `ENABLE_INGEST_REFRESH=false` protects public servers; per-client IP rate limiter (`CHAT_RATE_LIMIT_PER_MIN=10`) guards the Gemini agent loop.
+- **1-Click Blueprints**: Configured for Railway ([`railway.json`](railway.json)) and Render ([`render.yaml`](render.yaml)).
+
+---
+
+## 🔒 Data and Privacy Statement
+
+> GitHub data comes from the public repository `fastapi/fastapi` and contains only public information. Contributor identities are pseudonymized (hashed with a private salt) and emails, names and profile links are removed before anything is stored. All Slack-style and Jira-style records (teams, tickets, chat threads, decisions) are synthetic and generated deterministically from the public data. No private, login-protected, paywalled or personal data is used.
+
+---
+
+## 🤖 AI Disclosure
+
+> This project was built with AI assistance. Claude (Anthropic) helped design the architecture and plan. Antigravity (AI coding assistant) generated much of the code. I reviewed, tested and can explain every part of it, and the design decisions are documented in `docs/decisions.md`. At runtime the agent uses Google's Gemini models (`gemini-3.5-flash-lite`, `gemini-embedding-001`).
+
+---
+
+## 🧪 Testing
+
+Automated test execution is orchestrated via `scripts/test.sh`. All tests run against safe isolated test graphs (`company_brain_test`) per the mandatory test-safety rule.
 
 ```bash
-# Run all tests
-pytest backend/tests -v
+# Run full test suite (T1 through T8)
+bash scripts/test.sh
 ```
 
-### Key Tests:
-- `test_t1_fixture.py`: Verifies deterministic ingestion against tiny ground truth.
-- `test_b5_services.py` (T2, T3): Verifies ground-truth decision freshness and `simulate_pr` / `reset_demo` state restoration.
-- `test_t4_mcp.py`: Verifies all 11 MCP tools return `ToolResult` with valid evidence and fail-safe error handling.
-- `test_t5_degradation.py`: **Proves the application strictly requires FalkorDB** — when FalkorDB is unreachable, `/api/health` reports `degraded`, and routes return `503 GRAPH_UNAVAILABLE`.
-- `test_t6_agent.py`: Verifies citation filtering, date enrichment, and connection path highlighting.
-- `test_t7_contract.py`: Verifies all API endpoints adhere to OpenAPI contracts and child MCP auto-restart.
-- `test_t8_cypher_isolation.py`: Enforces Anti-clash Rule 2 — no Cypher strings in `mcp_server/` or `brain_api/`.
+### Test Suite Index (T1 – T8)
+
+| Test ID | File | Verification Objective |
+|---|---|---|
+| **T1** | [`backend/tests/test_t1_fixture.py`](backend/tests/test_t1_fixture.py) | Ingest tiny fixture snapshot; verify deterministic node & edge count parity. |
+| **T2** | [`backend/tests/test_b5_services.py`](backend/tests/test_b5_services.py) | `Q09` freshness state for every decision equals `ground_truth.json` oracle. |
+| **T3** | [`backend/tests/test_b5_services.py`](backend/tests/test_b5_services.py) | `simulate_pr` flips affected decision freshness; `reset_demo` fully restores baseline. |
+| **T4** | [`backend/tests/test_t4_mcp.py`](backend/tests/test_t4_mcp.py) | All 11 MCP tools return `ToolResult` with valid evidence and fail-safe error handling. |
+| **T5** | [`backend/tests/test_t5_degradation.py`](backend/tests/test_t5_degradation.py) | FalkorDB stopped: `/api/health` reports degraded, `/api/chat` returns 503 `GRAPH_UNAVAILABLE`; container restarts and recovers. |
+| **T6** | [`backend/tests/test_t6_agent.py`](backend/tests/test_t6_agent.py) | Citation filter strips ungrounded markers `[[unknown_id]]` and keeps verified ones. |
+| **T7** | [`backend/tests/test_t7_contract.py`](backend/tests/test_t7_contract.py) | Every REST route validates strictly against Pydantic models; child MCP auto-restarts on crash. |
+| **T8** | [`backend/tests/test_t8_cypher_isolation.py`](backend/tests/test_t8_cypher_isolation.py) | Grep test ensures no `MATCH`, `MERGE`, `CALL`, `CREATE`, or `UNWIND` string literals exist in `mcp_server/` or `brain_api/`. |
 
 ---
 
-## 🎬 Demo Walkthrough Script
+## 📜 License
 
-Use this sequence to explore or record the demo:
-
-1. **"Which decisions need review?"**  
-   - Agent invokes `list_stale_decisions`.  
-   - Returns all stale decisions ordered by drift count with citations `[[dec_004]]`.  
-   - Click a citation chip to open node properties.
-
-2. **"Why did we decide Implement structured request lifecycle telemetry in tests?"**  
-   - Agent invokes `search_knowledge` and `trace_decision`.  
-   - Returns the exact rationale and decision context.  
-   - Provenance path is highlighted in the interactive Cytoscape graph.
-
-3. **"Is that decision still valid?"**  
-   - Agent invokes `check_decision_freshness`.  
-   - Confirms the decision is stale (81 subsequent drifting changes).
-
-4. **"Simulate PR Change" (Demo Controls)**  
-   - In the top bar, click **Simulate PR**.  
-   - Target module `m_tests_benchmarks` and click **Simulate Merge**.  
-   - A toast notification announces: `dec_006: fresh ➔ stale`.
-
-5. **"Flag it for review"**  
-   - Click **Flag** on the decision card or type *"Flag dec_006 for review"*.  
-   - Creates a `ReviewRequest` assigned to the decider. Switch to the **Reviews** tab to see it.
-
-6. **"FalkorDB Offline Proof" (Test T5)**  
-   - Stop FalkorDB (`docker compose stop falkordb`).  
-   - Reload page or hit `/api/chat`: persistent banner displays `FalkorDB Graph Engine is unavailable (503 GRAPH_UNAVAILABLE)`.
-
----
-
-## 🔒 Data Policy Statement
-
-- **Public Repository Source**: All code, commit history, and PR data is drawn from the public open-source repository `fastapi/fastapi`.
-- **Pseudonymization (Rule D5)**: No real names, emails, avatars, or raw GitHub usernames are stored in disk caches or in the graph database. Contributor identities are deterministically salted and hashed into `p_<sha256>[:8]` and displayed as `Contributor <hash>`.
-- **Synthetic Organizational Data**: All Slack channels, discussion threads, Jira-style issue tickets, and team structures are deterministically generated synthetic artifacts created specifically for this benchmark.
-
----
-
-## 🤖 AI Disclosure & Engineering Accountability
-
-This project was built pair-programming with the **Antigravity** advanced agentic coding assistant. All architectural decisions (D1–D11), schema definitions, graph queries, MCP tool contracts, agent loops, and frontend components were reviewed, verified, tested, and can be explained in complete detail by the author.
-
----
-
-## 📄 Documentation Links
-
-- [`ARCHITECTURE.md`](ARCHITECTURE.md): Complete architecture specification and source of truth.
-- [`docs/decisions.md`](docs/decisions.md): Comprehensive architectural decision log (D1–D11, weights, pinned versions).
-- [`docs/queries.md`](docs/queries.md): Auto-generated documentation of all 27 Cypher queries and PageRank implementation.
+[MIT License](LICENSE) — Copyright (c) 2026 Arya P D. All rights reserved.

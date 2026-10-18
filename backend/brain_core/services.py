@@ -673,14 +673,19 @@ def who_owns(
 
     matched_rows = res_q03.result_set
     if len(matched_rows) > 1:
-        q_clean = module.strip().rstrip("/").lower()
-        exact_matches = [
-            r for r in matched_rows
-            if (r[2] and r[2].strip().rstrip("/").lower() == q_clean)
-            or (r[1] and r[1].strip().rstrip("/").lower() == q_clean)
-        ]
-        if len(exact_matches) == 1:
-            matched_rows = exact_matches
+        if module.startswith("m_"):
+            id_matches = [r for r in matched_rows if r[0] == module]
+            if len(id_matches) == 1:
+                matched_rows = id_matches
+            else:
+                candidates = [{"id": r[0], "display": r[1], "path": r[2]} for r in matched_rows]
+                return _build_tool_result(
+                    ok=False,
+                    summary=f"Multiple modules matched '{module}'. Please specify one.",
+                    data={"candidates": candidates},
+                    evidence=[],
+                    cypher_ids=["Q03"],
+                )
         else:
             candidates = [{"id": r[0], "display": r[1], "path": r[2]} for r in matched_rows]
             return _build_tool_result(
@@ -690,6 +695,7 @@ def who_owns(
                 evidence=[],
                 cypher_ids=["Q03"],
             )
+
 
     mod_id = matched_rows[0][0]
     mod_display = matched_rows[0][1]
@@ -921,14 +927,19 @@ def recent_changes(
 
     matched_rows_rc = res_q03.result_set
     if len(matched_rows_rc) > 1:
-        q_clean = module.strip().rstrip("/").lower()
-        exact_matches = [
-            r for r in matched_rows_rc
-            if (r[2] and r[2].strip().rstrip("/").lower() == q_clean)
-            or (r[1] and r[1].strip().rstrip("/").lower() == q_clean)
-        ]
-        if len(exact_matches) == 1:
-            matched_rows_rc = exact_matches
+        if module.startswith("m_"):
+            id_matches = [r for r in matched_rows_rc if r[0] == module]
+            if len(id_matches) == 1:
+                matched_rows_rc = id_matches
+            else:
+                candidates = [{"id": r[0], "display": r[1], "path": r[2]} for r in matched_rows_rc]
+                return _build_tool_result(
+                    ok=False,
+                    summary=f"Multiple modules matched '{module}'. Please specify one.",
+                    data={"candidates": candidates},
+                    evidence=[],
+                    cypher_ids=["Q03"],
+                )
         else:
             candidates = [{"id": r[0], "display": r[1], "path": r[2]} for r in matched_rows_rc]
             return _build_tool_result(
@@ -938,6 +949,7 @@ def recent_changes(
                 evidence=[],
                 cypher_ids=["Q03"],
             )
+
 
     mod_id = matched_rows_rc[0][0]
     mod_display = matched_rows_rc[0][1]
