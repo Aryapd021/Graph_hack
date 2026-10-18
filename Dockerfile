@@ -1,5 +1,7 @@
 # Multi-stage Dockerfile for Company Brain Production Deployment
-# Builds React frontend SPA and runs FastAPI backend serving both API and static UI
+# Per ARCHITECTURE.md Section 18b:
+# 1. Node stage: build frontend web/dist
+# 2. Python stage: install backend, copy web/dist to /app/static, start uvicorn
 
 # --- Stage 1: Build Frontend SPA ---
 FROM node:20-alpine AS frontend-builder
@@ -18,6 +20,7 @@ WORKDIR /app
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONPATH=/app/backend \
     SERVE_STATIC=true \
     PORT=8000
 
@@ -25,10 +28,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-COPY backend/pyproject.toml ./backend/
-RUN pip install --no-cache-dir -e ./backend
-
 COPY backend/ ./backend/
+RUN pip install --no-cache-dir ./backend
+
 COPY data/ ./data/
 
 # Copy built frontend static files to /app/static

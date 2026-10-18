@@ -169,12 +169,53 @@ npm run dev
 
 ## ☁️ Deployment
 
-Summarized from Section 18b of `ARCHITECTURE.md`:
+Summarized from Section 18b of `ARCHITECTURE.md` and `MASTERPLAN.md` (Task B12):
 
-- **Topology**: Single-container deployment where FastAPI serves `/api/*` and the static React SPA (`web/dist` mounted at `/`) over a unified origin, connecting to FalkorDB Cloud via TLS.
-- **Production Container**: Built via multi-stage [`Dockerfile`](Dockerfile) (Stage 1: Node 20 builds `web/dist`; Stage 2: Python 3.11-slim installs backend and runs Uvicorn on single worker).
-- **Public Exposure Controls**: `DEMO_MODE=true` enables `/api/demo/*`; `ENABLE_INGEST_REFRESH=false` protects public servers; per-client IP rate limiter (`CHAT_RATE_LIMIT_PER_MIN=10`) guards the Gemini agent loop.
-- **1-Click Blueprints**: Configured for Railway ([`railway.json`](railway.json)) and Render ([`render.yaml`](render.yaml)).
+### Architecture & Production Topology
+- **Unified Single Container**: FastAPI serves `/api/*` and the static React SPA (`web/dist` mounted at `/`) over a single origin, connecting to FalkorDB Cloud over TLS (`FALKORDB_SSL=true`).
+- **Production Container**: Multi-stage build via [`deploy/Dockerfile.prod`](deploy/Dockerfile.prod) (or root [`Dockerfile`](Dockerfile)):
+  - **Stage 1 (Node 20-alpine)**: `cd web && npm install && npm run build` produces static bundle in `web/dist`.
+  - **Stage 2 (Python 3.11-slim)**: Installs `backend` with `pip install -e .`, copies `web/dist` to `/app/static`, sets `SERVE_STATIC=true`, and launches Uvicorn on port `${PORT:-8000}` with `--workers 1`.
+- **Static Serving Rule**: Handled in [`backend/brain_api/main.py`](backend/brain_api/main.py):
+  - SPA fallback applies only to non-`/api` paths (serving `/app/static/index.html` or static assets).
+  - Unknown `/api/*` endpoints strictly return `404 NOT_FOUND` with normalized `ErrorResponse` and never fall through to the SPA.
+
+### Railway Deployment Notes (Section 18b)
+- **Service Creation**: Link your GitHub repository (`Aryapd021/Graph_hack`) in Railway.
+- **Port**: Railway injects `${PORT}` automatically; the Dockerfile binds to `${PORT:-8000}`.
+- **Dockerfile Path**: Point the service at `deploy/Dockerfile.prod` (or root `Dockerfile`).
+- **Health Check Path**: Set health check path to `/api/health`.
+- **Replica Count**: Exactly **1 replica** (rate limiting and child MCP process are per-process in-memory).
+- **Network / Gate G7**: Confirm outbound TLS connectivity to your FalkorDB Cloud host. If FalkorDB Cloud has an IP allowlist, ensure Railway's outbound IPs are permitted.
+
+### Required Host Environment Variables
+Set these variables in your hosting provider's dashboard (e.g. Railway Variables tab):
+
+```env
+# FalkorDB Cloud Connection (from FalkorDB Cloud console)
+FALKORDB_HOST=your-cluster-endpoint.falkordb.cloud
+FALKORDB_PORT=6379
+FALKORDB_USERNAME=your_username
+FALKORDB_PASSWORD=your_falkordb_cloud_password
+FALKORDB_SSL=true
+FALKORDB_GRAPH=fastapi_brain
+
+# Gemini API Credentials (I2, I3)
+GEMINI_API_KEY=your_gemini_api_key_here
+GEMINI_MODEL=gemini-3.5-flash-lite
+GEMINI_EMBED_MODEL=gemini-embedding-001
+EMBED_DIM=3072
+GEMINI_THINKING_LEVEL=low
+LLM_TIMEOUT_S=90
+
+# Public Exposure & Production Behavior (D12, D13)
+SERVE_STATIC=true
+DEMO_MODE=true
+ENABLE_INGEST_REFRESH=false
+CHAT_RATE_LIMIT_PER_MIN=10
+```
+
+> **Security Note:** Secrets (`GEMINI_API_KEY`, `FALKORDB_PASSWORD`) must live only in your cloud dashboard and your local gitignored `.env` / `.env.cloud`. Never commit credentials.
 
 ---
 
