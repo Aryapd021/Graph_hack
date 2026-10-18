@@ -7,7 +7,7 @@
 
 ## 🌐 Live Demo URL
 
-**Live Demo URL:** `TBD (added in B12)`
+**Live Demo URL: https://developers.cloudflare.com/agent-setup/prompt.md
 
 ---
 
