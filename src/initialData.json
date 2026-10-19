@@ -1,0 +1,1585 @@
+{
+  "health": {
+    "status": "ok",
+    "falkordb": true,
+    "mcp": true,
+    "counts": {
+      "nodes": 980,
+      "edges": 4379
+    },
+    "demo_mode": true,
+    "ingest_refresh": true
+  },
+  "overview": {
+    "nodes": [
+      {
+        "id": "dec_001",
+        "label": "Decision",
+        "display": "Standardize error handling and exception formatting in docs/en/docs",
+        "props": {
+          "id": "dec_001",
+          "decided_at": 1753522542,
+          "display": "Standardize error handling and exception formatting in docs/en/docs",
+          "source": "synthetic",
+          "summary": "Adopt centralized exception handlers and structured RFC-7807 error responses across docs/en/docs.",
+          "rationale": "Inconsistent error payloads between modules complicated API client development. Centralized validation and error mapping simplifies troubleshooting and client SDK generation.",
+          "status": "superseded"
+        }
+      },
+      {
+        "id": "p_a2f63251",
+        "label": "Person",
+        "display": "Contributor a2f63251",
+        "props": {
+          "id": "p_a2f63251",
+          "display": "Contributor a2f63251",
+          "source": "github",
+          "role": "Senior Backend Engineer"
+        }
+      },
+      {
+        "id": "m_docs_en_docs",
+        "label": "Module",
+        "display": "docs/en/docs",
+        "props": {
+          "id": "m_docs_en_docs",
+          "path": "docs/en/docs",
+          "display": "docs/en/docs",
+          "source": "github"
+        }
+      },
+      {
+        "id": "d_ce80719308",
+        "label": "Doc",
+        "display": "Additional Status Codes { #additional-status-codes }",
+        "props": {
+          "id": "d_ce80719308",
+          "path": "docs/en/docs/advanced/additional-status-codes.md",
+          "display": "Additional Status Codes { #additional-status-codes }",
+          "source": "github",
+          "url": "https://github.com/fastapi/fastapi/blob/master/docs/en/docs/advanced/additional-status-codes.md",
+          "kind": "guide",
+          "updated_at": 1781861384
+        }
+      },
+      {
+        "id": "dec_010",
+        "label": "Decision",
+        "display": "Implement idempotent state transitions in docs/en/docs",
+        "props": {
+          "id": "dec_010",
+          "decided_at": 1785227391,
+          "display": "Implement idempotent state transitions in docs/en/docs",
+          "source": "synthetic",
+          "summary": "Introduce idempotency keys and state preconditions for all mutating actions processed by docs/en/docs.",
+          "rationale": "Network retries by distributed clients caused duplicate state mutations and intermittent race conditions during failover.",
+          "status": "active"
+        }
+      },
+      {
+        "id": "tk_BRAIN-1",
+        "label": "Ticket",
+        "display": "[BRAIN-1] Standardize error handling and exception formatting in docs/en/docs",
+        "props": {
+          "id": "tk_BRAIN-1",
+          "display": "[BRAIN-1] Standardize error handling and exception formatting in docs/en/docs",
+          "source": "synthetic",
+          "created_at": 1753522542,
+          "status": "resolved",
+          "key": "BRAIN-1",
+          "resolved_at": 1753529742,
+          "description": "Implement architectural decision dec_001: Adopt centralized exception handlers and structured RFC-7807 error responses across docs/en/docs."
+        }
+      },
+      {
+        "id": "th_001",
+        "label": "Thread",
+        "display": "#eng-decisions: Discussion on Standardize error handling and exception formatting in docs/en/docs",
+        "props": {
+          "id": "th_001",
+          "display": "#eng-decisions: Discussion on Standardize error handling and exception formatting in docs/en/docs",
+          "source": "synthetic",
+          "channel": "#eng-decisions",
+          "started_at": 1753349742
+        }
+      },
+      {
+        "id": "pr_13535",
+        "label": "PR",
+        "display": "\ud83d\udcdd Add discussion template for new language translation requests (#13535)",
+        "props": {
+          "id": "pr_13535",
+          "merged_at": 1753529742,
+          "display": "\ud83d\udcdd Add discussion template for new language translation requests (#13535)",
+          "source": "github",
+          "number": 13535,
+          "state": "merged",
+          "created_at": 1753522542,
+          "body_excerpt": "",
+          "url": "https://github.com/fastapi/fastapi/pull/13535"
+        }
+      },
+      {
+        "id": "dec_002",
+        "label": "Decision",
+        "display": "Migrate configuration parameters to environment variables in docs/en/docs/advanced",
+        "props": {
+          "id": "dec_002",
+          "decided_at": 1756627147,
+          "display": "Migrate configuration parameters to environment variables in docs/en/docs/advanced",
+          "source": "synthetic",
+          "summary": "Move hardcoded and file-based runtime settings in docs/en/docs/advanced into 12-factor environment variables.",
+          "rationale": "Decoupling deployment configuration from application code allows seamless multi-environment orchestration and containerized runtime configuration.",
+          "status": "superseded"
+        }
+      },
+      {
+        "id": "p_d4928ba9",
+        "label": "Person",
+        "display": "Contributor d4928ba9",
+        "props": {
+          "id": "p_d4928ba9",
+          "display": "Contributor d4928ba9",
+          "source": "github",
+          "role": "Senior Backend Engineer"
+        }
+      },
+      {
+        "id": "m_docs_en_docs_advanced",
+        "label": "Module",
+        "display": "docs/en/docs/advanced",
+        "props": {
+          "id": "m_docs_en_docs_advanced",
+          "path": "docs/en/docs/advanced",
+          "display": "docs/en/docs/advanced",
+          "source": "github"
+        }
+      },
+      {
+        "id": "dec_009",
+        "label": "Decision",
+        "display": "Isolate connection pooling and retry policies in docs/en/docs/advanced",
+        "props": {
+          "id": "dec_009",
+          "decided_at": 1784917772,
+          "display": "Isolate connection pooling and retry policies in docs/en/docs/advanced",
+          "source": "synthetic",
+          "summary": "Configure dedicated client pool limits, timeouts, and exponential backoff strategies for docs/en/docs/advanced.",
+          "rationale": "Exhaustion of global socket pools by bursty downstream calls caused cascading timeouts in unrelated user-facing services.",
+          "status": "active"
+        }
+      },
+      {
+        "id": "tk_BRAIN-2",
+        "label": "Ticket",
+        "display": "[BRAIN-2] Migrate configuration parameters to environment variables in docs/en/docs/advanced",
+        "props": {
+          "id": "tk_BRAIN-2",
+          "display": "[BRAIN-2] Migrate configuration parameters to environment variables in docs/en/docs/advanced",
+          "source": "synthetic",
+          "created_at": 1756627147,
+          "status": "resolved",
+          "key": "BRAIN-2",
+          "resolved_at": 1756634347,
+          "description": "Implement architectural decision dec_002: Move hardcoded and file-based runtime settings in docs/en/docs/advanced into 12-factor environment variables."
+        }
+      },
+      {
+        "id": "th_002",
+        "label": "Thread",
+        "display": "#eng-decisions: Discussion on Migrate configuration parameters to environment variables in docs/en/docs/advanced",
+        "props": {
+          "id": "th_002",
+          "display": "#eng-decisions: Discussion on Migrate configuration parameters to environment variables in docs/en/docs/advanced",
+          "source": "synthetic",
+          "channel": "#eng-decisions",
+          "started_at": 1756367947
+        }
+      },
+      {
+        "id": "pr_11441",
+        "label": "PR",
+        "display": "\ud83d\udcdd Update TrustedHostMiddleware Documentation (#11441)",
+        "props": {
+          "id": "pr_11441",
+          "merged_at": 1756634347,
+          "display": "\ud83d\udcdd Update TrustedHostMiddleware Documentation (#11441)",
+          "source": "github",
+          "number": 11441,
+          "state": "merged",
+          "created_at": 1756627147,
+          "body_excerpt": "",
+          "url": "https://github.com/fastapi/fastapi/pull/11441"
+        }
+      },
+      {
+        "id": "dec_003",
+        "label": "Decision",
+        "display": "Deprecate legacy synchronous interfaces in fastapi/dependencies",
+        "props": {
+          "id": "dec_003",
+          "decided_at": 1758381953,
+          "display": "Deprecate legacy synchronous interfaces in fastapi/dependencies",
+          "source": "synthetic",
+          "summary": "Formally deprecate blocking sync helpers in fastapi/dependencies in favor of native asynchronous patterns.",
+          "rationale": "High-throughput asynchronous workloads were blocked by legacy synchronous helper calls, causing event loop starvation under peak loads.",
+          "status": "active"
+        }
+      },
+      {
+        "id": "p_d04a0b32",
+        "label": "Person",
+        "display": "Contributor d04a0b32",
+        "props": {
+          "id": "p_d04a0b32",
+          "display": "Contributor d04a0b32",
+          "source": "github",
+          "role": "Infrastructure Engineer"
+        }
+      },
+      {
+        "id": "m_tests",
+        "label": "Module",
+        "display": "tests",
+        "props": {
+          "id": "m_tests",
+          "path": "tests",
+          "display": "tests",
+          "source": "github"
+        }
+      },
+      {
+        "id": "m_fastapi_dependencies",
+        "label": "Module",
+        "display": "fastapi/dependencies",
+        "props": {
+          "id": "m_fastapi_dependencies",
+          "path": "fastapi/dependencies",
+          "display": "fastapi/dependencies",
+          "source": "github"
+        }
+      },
+      {
+        "id": "d_8ec9a00bfd",
+        "label": "Doc",
+        "display": "README",
+        "props": {
+          "id": "d_8ec9a00bfd",
+          "path": "README.md",
+          "display": "README",
+          "source": "github",
+          "url": "https://github.com/fastapi/fastapi/blob/master/README.md",
+          "kind": "readme",
+          "updated_at": 1792260630
+        }
+      },
+      {
+        "id": "tk_BRAIN-3",
+        "label": "Ticket",
+        "display": "[BRAIN-3] Deprecate legacy synchronous interfaces in fastapi/dependencies",
+        "props": {
+          "id": "tk_BRAIN-3",
+          "display": "[BRAIN-3] Deprecate legacy synchronous interfaces in fastapi/dependencies",
+          "source": "synthetic",
+          "created_at": 1758381953,
+          "status": "resolved",
+          "key": "BRAIN-3",
+          "resolved_at": 1758389153,
+          "description": "Implement architectural decision dec_003: Formally deprecate blocking sync helpers in fastapi/dependencies in favor of native asynchronous patterns."
+        }
+      },
+      {
+        "id": "th_003",
+        "label": "Thread",
+        "display": "#eng-decisions: Discussion on Deprecate legacy synchronous interfaces in fastapi/dependencies",
+        "props": {
+          "id": "th_003",
+          "display": "#eng-decisions: Discussion on Deprecate legacy synchronous interfaces in fastapi/dependencies",
+          "source": "synthetic",
+          "channel": "#eng-decisions",
+          "started_at": 1758122753
+        }
+      },
+      {
+        "id": "pr_13694",
+        "label": "PR",
+        "display": "\ud83d\udc1b Reenable `allow_arbitrary_types` when only 1 argument is used on the API endpoint (#13694)",
+        "props": {
+          "id": "pr_13694",
+          "merged_at": 1758389153,
+          "display": "\ud83d\udc1b Reenable `allow_arbitrary_types` when only 1 argument is used on the API endpoint (#13694)",
+          "source": "github",
+          "number": 13694,
+          "state": "merged",
+          "created_at": 1758381953,
+          "body_excerpt": "",
+          "url": "https://github.com/fastapi/fastapi/pull/13694"
+        }
+      },
+      {
+        "id": "dec_004",
+        "label": "Decision",
+        "display": "Implement structured request lifecycle telemetry in tests",
+        "props": {
+          "id": "dec_004",
+          "decided_at": 1760193954,
+          "display": "Implement structured request lifecycle telemetry in tests",
+          "source": "synthetic",
+          "summary": "Inject OpenTelemetry tracing spans and standardized metrics counters across key methods in tests.",
+          "rationale": "Distributed tracing was incomplete without module-level span boundaries, delaying root-cause analysis during production latency spikes.",
+          "status": "active"
+        }
+      },
+      {
+        "id": "p_02ad08f7",
+        "label": "Person",
+        "display": "Contributor 02ad08f7",
+        "props": {
+          "id": "p_02ad08f7",
+          "display": "Contributor 02ad08f7",
+          "source": "github",
+          "role": "Software Engineer"
+        }
+      },
+      {
+        "id": "m_fastapi",
+        "label": "Module",
+        "display": "fastapi",
+        "props": {
+          "id": "m_fastapi",
+          "path": "fastapi",
+          "display": "fastapi",
+          "source": "github"
+        }
+      },
+      {
+        "id": "tk_BRAIN-4",
+        "label": "Ticket",
+        "display": "[BRAIN-4] Implement structured request lifecycle telemetry in tests",
+        "props": {
+          "id": "tk_BRAIN-4",
+          "display": "[BRAIN-4] Implement structured request lifecycle telemetry in tests",
+          "source": "synthetic",
+          "created_at": 1760193954,
+          "status": "resolved",
+          "key": "BRAIN-4",
+          "resolved_at": 1760201154,
+          "description": "Implement architectural decision dec_004: Inject OpenTelemetry tracing spans and standardized metrics counters across key methods in tests."
+        }
+      },
+      {
+        "id": "th_004",
+        "label": "Thread",
+        "display": "#eng-decisions: Discussion on Implement structured request lifecycle telemetry in tests",
+        "props": {
+          "id": "th_004",
+          "display": "#eng-decisions: Discussion on Implement structured request lifecycle telemetry in tests",
+          "source": "synthetic",
+          "channel": "#eng-decisions",
+          "started_at": 1760107554
+        }
+      },
+      {
+        "id": "pr_14168",
+        "label": "PR",
+        "display": "\u2728 Add support for `from pydantic.v1 import BaseModel`, mixed Pydantic v1 and v2 models in the same app (#14168)",
+        "props": {
+          "id": "pr_14168",
+          "merged_at": 1760201154,
+          "display": "\u2728 Add support for `from pydantic.v1 import BaseModel`, mixed Pydantic v1 and v2 models in the same app (#14168)",
+          "source": "github",
+          "number": 14168,
+          "state": "merged",
+          "created_at": 1760193954,
+          "body_excerpt": "",
+          "url": "https://github.com/fastapi/fastapi/pull/14168"
+        }
+      },
+      {
+        "id": "dec_005",
+        "label": "Decision",
+        "display": "Enforce strict schema validation rules in fastapi/dependencies",
+        "props": {
+          "id": "dec_005",
+          "decided_at": 1764643195,
+          "display": "Enforce strict schema validation rules in fastapi/dependencies",
+          "source": "synthetic",
+          "summary": "Require strict Pydantic model validation on all external inputs received by fastapi/dependencies.",
+          "rationale": "Malformed payloads previously passed initial routing and triggered unexpected internal type errors deep within execution handlers.",
+          "status": "active"
+        }
+      },
+      {
+        "id": "p_80213f74",
+        "label": "Person",
+        "display": "Contributor 80213f74",
+        "props": {
+          "id": "p_80213f74",
+          "display": "Contributor 80213f74",
+          "source": "github",
+          "role": "Engineering Manager"
+        }
+      },
+      {
+        "id": "tk_BRAIN-5",
+        "label": "Ticket",
+        "display": "[BRAIN-5] Enforce strict schema validation rules in fastapi/dependencies",
+        "props": {
+          "id": "tk_BRAIN-5",
+          "display": "[BRAIN-5] Enforce strict schema validation rules in fastapi/dependencies",
+          "source": "synthetic",
+          "created_at": 1764643195,
+          "status": "resolved",
+          "key": "BRAIN-5",
+          "resolved_at": 1764650395,
+          "description": "Implement architectural decision dec_005: Require strict Pydantic model validation on all external inputs received by fastapi/dependencies."
+        }
+      },
+      {
+        "id": "th_005",
+        "label": "Thread",
+        "display": "#eng-decisions: Discussion on Enforce strict schema validation rules in fastapi/dependencies",
+        "props": {
+          "id": "th_005",
+          "display": "#eng-decisions: Discussion on Enforce strict schema validation rules in fastapi/dependencies",
+          "source": "synthetic",
+          "channel": "#eng-decisions",
+          "started_at": 1764383995
+        }
+      },
+      {
+        "id": "pr_13537",
+        "label": "PR",
+        "display": "\ud83d\udc1b Fix support for form values with empty strings interpreted as missing (`None` if that's the default), for compatibility with HTML forms (#13537)",
+        "props": {
+          "id": "pr_13537",
+          "merged_at": 1764650395,
+          "display": "\ud83d\udc1b Fix support for form values with empty strings interpreted as missing (`None` if that's the default), for compatibility with HTML forms (#13537)",
+          "source": "github",
+          "number": 13537,
+          "state": "merged",
+          "created_at": 1764643195,
+          "body_excerpt": "",
+          "url": "https://github.com/fastapi/fastapi/pull/13537"
+        }
+      },
+      {
+        "id": "dec_006",
+        "label": "Decision",
+        "display": "Refactor dependency injection graph for tests/benchmarks",
+        "props": {
+          "id": "dec_006",
+          "decided_at": 1766057049,
+          "display": "Refactor dependency injection graph for tests/benchmarks",
+          "source": "synthetic",
+          "summary": "Simplify dependency overrides and sub-dependency resolution logic in tests/benchmarks.",
+          "rationale": "Circular references and deep nested scopes caused subtle caching issues when overriding dependencies in end-to-end integration test suites.",
+          "status": "active"
+        }
+      },
+      {
+        "id": "m_tests_benchmarks",
+        "label": "Module",
+        "display": "tests/benchmarks",
+        "props": {
+          "id": "m_tests_benchmarks",
+          "path": "tests/benchmarks",
+          "display": "tests/benchmarks",
+          "source": "github"
+        }
+      },
+      {
+        "id": "tk_BRAIN-6",
+        "label": "Ticket",
+        "display": "[BRAIN-6] Refactor dependency injection graph for tests/benchmarks",
+        "props": {
+          "id": "tk_BRAIN-6",
+          "display": "[BRAIN-6] Refactor dependency injection graph for tests/benchmarks",
+          "source": "synthetic",
+          "created_at": 1766057049,
+          "status": "resolved",
+          "key": "BRAIN-6",
+          "resolved_at": 1766064249,
+          "description": "Implement architectural decision dec_006: Simplify dependency overrides and sub-dependency resolution logic in tests/benchmarks."
+        }
+      },
+      {
+        "id": "th_006",
+        "label": "Thread",
+        "display": "#eng-decisions: Discussion on Refactor dependency injection graph for tests/benchmarks",
+        "props": {
+          "id": "th_006",
+          "display": "#eng-decisions: Discussion on Refactor dependency injection graph for tests/benchmarks",
+          "source": "synthetic",
+          "channel": "#eng-decisions",
+          "started_at": 1765797849
+        }
+      },
+      {
+        "id": "pr_14558",
+        "label": "PR",
+        "display": "\ud83d\udc77 Add performance tests with CodSpeed (#14558)",
+        "props": {
+          "id": "pr_14558",
+          "merged_at": 1766064249,
+          "display": "\ud83d\udc77 Add performance tests with CodSpeed (#14558)",
+          "source": "github",
+          "number": 14558,
+          "state": "merged",
+          "created_at": 1766057049,
+          "body_excerpt": "",
+          "url": "https://github.com/fastapi/fastapi/pull/14558"
+        }
+      },
+      {
+        "id": "dec_007",
+        "label": "Decision",
+        "display": "Optimize serialization and payload parsing in fastapi",
+        "props": {
+          "id": "dec_007",
+          "decided_at": 1770647517,
+          "display": "Optimize serialization and payload parsing in fastapi",
+          "source": "synthetic",
+          "summary": "Benchmark and streamline high-volume JSON encoding and decoding routines within fastapi.",
+          "rationale": "Profiling identified JSON serialization as the primary CPU bottleneck on data-heavy endpoints handling large collection responses.",
+          "status": "active"
+        }
+      },
+      {
+        "id": "p_1da23a1e",
+        "label": "Person",
+        "display": "Contributor 1da23a1e",
+        "props": {
+          "id": "p_1da23a1e",
+          "display": "Contributor 1da23a1e",
+          "source": "github",
+          "role": "Systems Engineer"
+        }
+      },
+      {
+        "id": "tk_BRAIN-7",
+        "label": "Ticket",
+        "display": "[BRAIN-7] Optimize serialization and payload parsing in fastapi",
+        "props": {
+          "id": "tk_BRAIN-7",
+          "display": "[BRAIN-7] Optimize serialization and payload parsing in fastapi",
+          "source": "synthetic",
+          "created_at": 1770647517,
+          "status": "resolved",
+          "key": "BRAIN-7",
+          "resolved_at": 1770654717,
+          "description": "Implement architectural decision dec_007: Benchmark and streamline high-volume JSON encoding and decoding routines within fastapi."
+        }
+      },
+      {
+        "id": "th_007",
+        "label": "Thread",
+        "display": "#eng-decisions: Discussion on Optimize serialization and payload parsing in fastapi",
+        "props": {
+          "id": "th_007",
+          "display": "#eng-decisions: Discussion on Optimize serialization and payload parsing in fastapi",
+          "source": "synthetic",
+          "channel": "#eng-decisions",
+          "started_at": 1770388317
+        }
+      },
+      {
+        "id": "pr_14873",
+        "label": "PR",
+        "display": "\ud83d\udc1b Fix `on_startup` and `on_shutdown` parameters of `APIRouter` (#14873)",
+        "props": {
+          "id": "pr_14873",
+          "merged_at": 1770654717,
+          "display": "\ud83d\udc1b Fix `on_startup` and `on_shutdown` parameters of `APIRouter` (#14873)",
+          "source": "github",
+          "number": 14873,
+          "state": "merged",
+          "created_at": 1770647517,
+          "body_excerpt": "",
+          "url": "https://github.com/fastapi/fastapi/pull/14873"
+        }
+      },
+      {
+        "id": "dec_008",
+        "label": "Decision",
+        "display": "Adopt granular permission scoping across fastapi/security",
+        "props": {
+          "id": "dec_008",
+          "decided_at": 1773649008,
+          "display": "Adopt granular permission scoping across fastapi/security",
+          "source": "synthetic",
+          "summary": "Transition security scopes in fastapi/security to role-based access control with discrete capability tokens.",
+          "rationale": "Coarse-grained authentication tokens gave services broader permissions than necessary, conflicting with least-privilege security requirements.",
+          "status": "active"
+        }
+      },
+      {
+        "id": "p_74571562",
+        "label": "Person",
+        "display": "Contributor 74571562",
+        "props": {
+          "id": "p_74571562",
+          "display": "Contributor 74571562",
+          "source": "github",
+          "role": "Infrastructure Engineer"
+        }
+      },
+      {
+        "id": "m_fastapi_security",
+        "label": "Module",
+        "display": "fastapi/security",
+        "props": {
+          "id": "m_fastapi_security",
+          "path": "fastapi/security",
+          "display": "fastapi/security",
+          "source": "github"
+        }
+      },
+      {
+        "id": "tk_BRAIN-8",
+        "label": "Ticket",
+        "display": "[BRAIN-8] Adopt granular permission scoping across fastapi/security",
+        "props": {
+          "id": "tk_BRAIN-8",
+          "display": "[BRAIN-8] Adopt granular permission scoping across fastapi/security",
+          "source": "synthetic",
+          "created_at": 1773649008,
+          "status": "resolved",
+          "key": "BRAIN-8",
+          "resolved_at": 1773656208,
+          "description": "Implement architectural decision dec_008: Transition security scopes in fastapi/security to role-based access control with discrete capability tokens."
+        }
+      },
+      {
+        "id": "th_008",
+        "label": "Thread",
+        "display": "#eng-decisions: Discussion on Adopt granular permission scoping across fastapi/security",
+        "props": {
+          "id": "th_008",
+          "display": "#eng-decisions: Discussion on Adopt granular permission scoping across fastapi/security",
+          "source": "synthetic",
+          "channel": "#eng-decisions",
+          "started_at": 1773562608
+        }
+      },
+      {
+        "id": "pr_15116",
+        "label": "PR",
+        "display": "\ud83d\udcdd Fix duplicated words in docstrings (#15116)",
+        "props": {
+          "id": "pr_15116",
+          "merged_at": 1773656208,
+          "display": "\ud83d\udcdd Fix duplicated words in docstrings (#15116)",
+          "source": "github",
+          "number": 15116,
+          "state": "merged",
+          "created_at": 1773649008,
+          "body_excerpt": "Fix \"to to\" and \"that that\" word duplications in security module docstrings,\nand \"be be\" in test data string.",
+          "url": "https://github.com/fastapi/fastapi/pull/15116"
+        }
+      },
+      {
+        "id": "m_docs_en_docs_tutorial",
+        "label": "Module",
+        "display": "docs/en/docs/tutorial",
+        "props": {
+          "id": "m_docs_en_docs_tutorial",
+          "path": "docs/en/docs/tutorial",
+          "display": "docs/en/docs/tutorial",
+          "source": "github"
+        }
+      },
+      {
+        "id": "tk_BRAIN-9",
+        "label": "Ticket",
+        "display": "[BRAIN-9] Isolate connection pooling and retry policies in docs/en/docs/advanced",
+        "props": {
+          "id": "tk_BRAIN-9",
+          "display": "[BRAIN-9] Isolate connection pooling and retry policies in docs/en/docs/advanced",
+          "source": "synthetic",
+          "created_at": 1784917772,
+          "status": "resolved",
+          "key": "BRAIN-9",
+          "resolved_at": 1784924972,
+          "description": "Implement architectural decision dec_009: Configure dedicated client pool limits, timeouts, and exponential backoff strategies for docs/en/docs/advanced."
+        }
+      },
+      {
+        "id": "th_009",
+        "label": "Thread",
+        "display": "#eng-decisions: Discussion on Isolate connection pooling and retry policies in docs/en/docs/advanced",
+        "props": {
+          "id": "th_009",
+          "display": "#eng-decisions: Discussion on Isolate connection pooling and retry policies in docs/en/docs/advanced",
+          "source": "synthetic",
+          "channel": "#eng-decisions",
+          "started_at": 1784831372
+        }
+      },
+      {
+        "id": "pr_15967",
+        "label": "PR",
+        "display": "\ud83d\udcdd Fix links in docs (#15967)",
+        "props": {
+          "id": "pr_15967",
+          "merged_at": 1784924972,
+          "display": "\ud83d\udcdd Fix links in docs (#15967)",
+          "source": "github",
+          "number": 15967,
+          "state": "merged",
+          "created_at": 1784917772,
+          "body_excerpt": "",
+          "url": "https://github.com/fastapi/fastapi/pull/15967"
+        }
+      },
+      {
+        "id": "tk_BRAIN-10",
+        "label": "Ticket",
+        "display": "[BRAIN-10] Implement idempotent state transitions in docs/en/docs",
+        "props": {
+          "id": "tk_BRAIN-10",
+          "display": "[BRAIN-10] Implement idempotent state transitions in docs/en/docs",
+          "source": "synthetic",
+          "created_at": 1785227391,
+          "status": "resolved",
+          "key": "BRAIN-10",
+          "resolved_at": 1785234591,
+          "description": "Implement architectural decision dec_010: Introduce idempotency keys and state preconditions for all mutating actions processed by docs/en/docs."
+        }
+      },
+      {
+        "id": "th_010",
+        "label": "Thread",
+        "display": "#eng-decisions: Discussion on Implement idempotent state transitions in docs/en/docs",
+        "props": {
+          "id": "th_010",
+          "display": "#eng-decisions: Discussion on Implement idempotent state transitions in docs/en/docs",
+          "source": "synthetic",
+          "channel": "#eng-decisions",
+          "started_at": 1785054591
+        }
+      },
+      {
+        "id": "pr_16088",
+        "label": "PR",
+        "display": "\ud83d\udd16 Release version 0.140.8 (#16088)",
+        "props": {
+          "id": "pr_16088",
+          "merged_at": 1785234591,
+          "display": "\ud83d\udd16 Release version 0.140.8 (#16088)",
+          "source": "github",
+          "number": 16088,
+          "state": "merged",
+          "created_at": 1785227391,
+          "body_excerpt": "",
+          "url": "https://github.com/fastapi/fastapi/pull/16088"
+        }
+      },
+      {
+        "id": "dec_011",
+        "label": "Decision",
+        "display": "Standardize pagination semantics and metadata in docs/en/docs/reference",
+        "props": {
+          "id": "dec_011",
+          "decided_at": 1785244101,
+          "display": "Standardize pagination semantics and metadata in docs/en/docs/reference",
+          "source": "synthetic",
+          "summary": "Unify cursor-based pagination parameters and response envelopes across all listing endpoints in docs/en/docs/reference.",
+          "rationale": "Mixed use of offset and cursor pagination confused API consumers and caused inconsistent memory spikes when reading large collections.",
+          "status": "active"
+        }
+      },
+      {
+        "id": "p_381cc471",
+        "label": "Person",
+        "display": "Contributor 381cc471",
+        "props": {
+          "id": "p_381cc471",
+          "display": "Contributor 381cc471",
+          "source": "github",
+          "role": "Senior Backend Engineer"
+        }
+      },
+      {
+        "id": "m_docs_en_docs_reference",
+        "label": "Module",
+        "display": "docs/en/docs/reference",
+        "props": {
+          "id": "m_docs_en_docs_reference",
+          "path": "docs/en/docs/reference",
+          "display": "docs/en/docs/reference",
+          "source": "github"
+        }
+      },
+      {
+        "id": "d_76204521b4",
+        "label": "Doc",
+        "display": "Encoders - `jsonable_encoder`",
+        "props": {
+          "id": "d_76204521b4",
+          "path": "docs/en/docs/reference/encoders.md",
+          "display": "Encoders - `jsonable_encoder`",
+          "source": "github",
+          "url": "https://github.com/fastapi/fastapi/blob/master/docs/en/docs/reference/encoders.md",
+          "kind": "guide",
+          "updated_at": 1750157319
+        }
+      },
+      {
+        "id": "tk_BRAIN-11",
+        "label": "Ticket",
+        "display": "[BRAIN-11] Standardize pagination semantics and metadata in docs/en/docs/reference",
+        "props": {
+          "id": "tk_BRAIN-11",
+          "display": "[BRAIN-11] Standardize pagination semantics and metadata in docs/en/docs/reference",
+          "source": "synthetic",
+          "created_at": 1785244101,
+          "status": "resolved",
+          "key": "BRAIN-11",
+          "resolved_at": 1785251301,
+          "description": "Implement architectural decision dec_011: Unify cursor-based pagination parameters and response envelopes across all listing endpoints in docs/en/docs/reference."
+        }
+      },
+      {
+        "id": "th_011",
+        "label": "Thread",
+        "display": "#eng-decisions: Discussion on Standardize pagination semantics and metadata in docs/en/docs/reference",
+        "props": {
+          "id": "th_011",
+          "display": "#eng-decisions: Discussion on Standardize pagination semantics and metadata in docs/en/docs/reference",
+          "source": "synthetic",
+          "channel": "#eng-decisions",
+          "started_at": 1784984901
+        }
+      },
+      {
+        "id": "pr_15930",
+        "label": "PR",
+        "display": "\ud83d\udcdd Add API reference page for fastapi.sse (#15930)",
+        "props": {
+          "id": "pr_15930",
+          "merged_at": 1785251301,
+          "display": "\ud83d\udcdd Add API reference page for fastapi.sse (#15930)",
+          "source": "github",
+          "number": 15930,
+          "state": "merged",
+          "created_at": 1785244101,
+          "body_excerpt": "",
+          "url": "https://github.com/fastapi/fastapi/pull/15930"
+        }
+      },
+      {
+        "id": "dec_012",
+        "label": "Decision",
+        "display": "Enhance cache invalidation coordination for docs/en/docs",
+        "props": {
+          "id": "dec_012",
+          "decided_at": 1785338138,
+          "display": "Enhance cache invalidation coordination for docs/en/docs",
+          "source": "synthetic",
+          "summary": "Implement deterministic cache invalidation hooks triggered whenever entities in docs/en/docs change.",
+          "rationale": "Stale cached reads persisted across updates because invalidation events lacked granular cache tag association.",
+          "status": "active"
+        }
+      },
+      {
+        "id": "tk_BRAIN-12",
+        "label": "Ticket",
+        "display": "[BRAIN-12] Enhance cache invalidation coordination for docs/en/docs",
+        "props": {
+          "id": "tk_BRAIN-12",
+          "display": "[BRAIN-12] Enhance cache invalidation coordination for docs/en/docs",
+          "source": "synthetic",
+          "created_at": 1785338138,
+          "status": "resolved",
+          "key": "BRAIN-12",
+          "resolved_at": 1785345338,
+          "description": "Implement architectural decision dec_012: Implement deterministic cache invalidation hooks triggered whenever entities in docs/en/docs change."
+        }
+      },
+      {
+        "id": "th_012",
+        "label": "Thread",
+        "display": "#eng-decisions: Discussion on Enhance cache invalidation coordination for docs/en/docs",
+        "props": {
+          "id": "th_012",
+          "display": "#eng-decisions: Discussion on Enhance cache invalidation coordination for docs/en/docs",
+          "source": "synthetic",
+          "channel": "#eng-decisions",
+          "started_at": 1785165338
+        }
+      },
+      {
+        "id": "pr_16106",
+        "label": "PR",
+        "display": "\ud83d\udd16 Release version 0.141.1 (#16106)",
+        "props": {
+          "id": "pr_16106",
+          "merged_at": 1785345338,
+          "display": "\ud83d\udd16 Release version 0.141.1 (#16106)",
+          "source": "github",
+          "number": 16106,
+          "state": "merged",
+          "created_at": 1785338138,
+          "body_excerpt": "",
+          "url": "https://github.com/fastapi/fastapi/pull/16106"
+        }
+      }
+    ],
+    "edges": [
+      {
+        "id": "dec_001|DECIDED_BY|p_a2f63251",
+        "source": "dec_001",
+        "target": "p_a2f63251",
+        "type": "DECIDED_BY"
+      },
+      {
+        "id": "dec_001|AFFECTS|m_docs_en_docs",
+        "source": "dec_001",
+        "target": "m_docs_en_docs",
+        "type": "AFFECTS"
+      },
+      {
+        "id": "dec_001|DOCUMENTED_IN|d_ce80719308",
+        "source": "dec_001",
+        "target": "d_ce80719308",
+        "type": "DOCUMENTED_IN"
+      },
+      {
+        "id": "dec_001|SUPERSEDED_BY|dec_010",
+        "source": "dec_001",
+        "target": "dec_010",
+        "type": "SUPERSEDED_BY"
+      },
+      {
+        "id": "dec_001|TRACKED_BY|tk_BRAIN-1",
+        "source": "dec_001",
+        "target": "tk_BRAIN-1",
+        "type": "TRACKED_BY"
+      },
+      {
+        "id": "dec_001|DISCUSSED_IN|th_001",
+        "source": "dec_001",
+        "target": "th_001",
+        "type": "DISCUSSED_IN"
+      },
+      {
+        "id": "pr_13535|IMPLEMENTS|dec_001",
+        "source": "pr_13535",
+        "target": "dec_001",
+        "type": "IMPLEMENTS"
+      },
+      {
+        "id": "dec_002|DECIDED_BY|p_d4928ba9",
+        "source": "dec_002",
+        "target": "p_d4928ba9",
+        "type": "DECIDED_BY"
+      },
+      {
+        "id": "dec_002|AFFECTS|m_docs_en_docs_advanced",
+        "source": "dec_002",
+        "target": "m_docs_en_docs_advanced",
+        "type": "AFFECTS"
+      },
+      {
+        "id": "dec_002|DOCUMENTED_IN|d_ce80719308",
+        "source": "dec_002",
+        "target": "d_ce80719308",
+        "type": "DOCUMENTED_IN"
+      },
+      {
+        "id": "dec_002|SUPERSEDED_BY|dec_009",
+        "source": "dec_002",
+        "target": "dec_009",
+        "type": "SUPERSEDED_BY"
+      },
+      {
+        "id": "dec_002|TRACKED_BY|tk_BRAIN-2",
+        "source": "dec_002",
+        "target": "tk_BRAIN-2",
+        "type": "TRACKED_BY"
+      },
+      {
+        "id": "dec_002|DISCUSSED_IN|th_002",
+        "source": "dec_002",
+        "target": "th_002",
+        "type": "DISCUSSED_IN"
+      },
+      {
+        "id": "pr_11441|IMPLEMENTS|dec_002",
+        "source": "pr_11441",
+        "target": "dec_002",
+        "type": "IMPLEMENTS"
+      },
+      {
+        "id": "dec_003|DECIDED_BY|p_d04a0b32",
+        "source": "dec_003",
+        "target": "p_d04a0b32",
+        "type": "DECIDED_BY"
+      },
+      {
+        "id": "dec_003|AFFECTS|m_tests",
+        "source": "dec_003",
+        "target": "m_tests",
+        "type": "AFFECTS"
+      },
+      {
+        "id": "dec_003|AFFECTS|m_fastapi_dependencies",
+        "source": "dec_003",
+        "target": "m_fastapi_dependencies",
+        "type": "AFFECTS"
+      },
+      {
+        "id": "dec_003|DOCUMENTED_IN|d_8ec9a00bfd",
+        "source": "dec_003",
+        "target": "d_8ec9a00bfd",
+        "type": "DOCUMENTED_IN"
+      },
+      {
+        "id": "dec_003|TRACKED_BY|tk_BRAIN-3",
+        "source": "dec_003",
+        "target": "tk_BRAIN-3",
+        "type": "TRACKED_BY"
+      },
+      {
+        "id": "dec_003|DISCUSSED_IN|th_003",
+        "source": "dec_003",
+        "target": "th_003",
+        "type": "DISCUSSED_IN"
+      },
+      {
+        "id": "pr_13694|IMPLEMENTS|dec_003",
+        "source": "pr_13694",
+        "target": "dec_003",
+        "type": "IMPLEMENTS"
+      },
+      {
+        "id": "dec_004|DECIDED_BY|p_02ad08f7",
+        "source": "dec_004",
+        "target": "p_02ad08f7",
+        "type": "DECIDED_BY"
+      },
+      {
+        "id": "dec_004|AFFECTS|m_fastapi",
+        "source": "dec_004",
+        "target": "m_fastapi",
+        "type": "AFFECTS"
+      },
+      {
+        "id": "dec_004|AFFECTS|m_tests",
+        "source": "dec_004",
+        "target": "m_tests",
+        "type": "AFFECTS"
+      },
+      {
+        "id": "dec_004|DOCUMENTED_IN|d_8ec9a00bfd",
+        "source": "dec_004",
+        "target": "d_8ec9a00bfd",
+        "type": "DOCUMENTED_IN"
+      },
+      {
+        "id": "dec_004|TRACKED_BY|tk_BRAIN-4",
+        "source": "dec_004",
+        "target": "tk_BRAIN-4",
+        "type": "TRACKED_BY"
+      },
+      {
+        "id": "dec_004|DISCUSSED_IN|th_004",
+        "source": "dec_004",
+        "target": "th_004",
+        "type": "DISCUSSED_IN"
+      },
+      {
+        "id": "pr_14168|IMPLEMENTS|dec_004",
+        "source": "pr_14168",
+        "target": "dec_004",
+        "type": "IMPLEMENTS"
+      },
+      {
+        "id": "dec_005|DECIDED_BY|p_80213f74",
+        "source": "dec_005",
+        "target": "p_80213f74",
+        "type": "DECIDED_BY"
+      },
+      {
+        "id": "dec_005|AFFECTS|m_tests",
+        "source": "dec_005",
+        "target": "m_tests",
+        "type": "AFFECTS"
+      },
+      {
+        "id": "dec_005|AFFECTS|m_fastapi_dependencies",
+        "source": "dec_005",
+        "target": "m_fastapi_dependencies",
+        "type": "AFFECTS"
+      },
+      {
+        "id": "dec_005|DOCUMENTED_IN|d_8ec9a00bfd",
+        "source": "dec_005",
+        "target": "d_8ec9a00bfd",
+        "type": "DOCUMENTED_IN"
+      },
+      {
+        "id": "dec_005|TRACKED_BY|tk_BRAIN-5",
+        "source": "dec_005",
+        "target": "tk_BRAIN-5",
+        "type": "TRACKED_BY"
+      },
+      {
+        "id": "dec_005|DISCUSSED_IN|th_005",
+        "source": "dec_005",
+        "target": "th_005",
+        "type": "DISCUSSED_IN"
+      },
+      {
+        "id": "pr_13537|IMPLEMENTS|dec_005",
+        "source": "pr_13537",
+        "target": "dec_005",
+        "type": "IMPLEMENTS"
+      },
+      {
+        "id": "dec_006|DECIDED_BY|p_02ad08f7",
+        "source": "dec_006",
+        "target": "p_02ad08f7",
+        "type": "DECIDED_BY"
+      },
+      {
+        "id": "dec_006|AFFECTS|m_tests_benchmarks",
+        "source": "dec_006",
+        "target": "m_tests_benchmarks",
+        "type": "AFFECTS"
+      },
+      {
+        "id": "dec_006|TRACKED_BY|tk_BRAIN-6",
+        "source": "dec_006",
+        "target": "tk_BRAIN-6",
+        "type": "TRACKED_BY"
+      },
+      {
+        "id": "dec_006|DISCUSSED_IN|th_006",
+        "source": "dec_006",
+        "target": "th_006",
+        "type": "DISCUSSED_IN"
+      },
+      {
+        "id": "pr_14558|IMPLEMENTS|dec_006",
+        "source": "pr_14558",
+        "target": "dec_006",
+        "type": "IMPLEMENTS"
+      },
+      {
+        "id": "dec_007|DECIDED_BY|p_1da23a1e",
+        "source": "dec_007",
+        "target": "p_1da23a1e",
+        "type": "DECIDED_BY"
+      },
+      {
+        "id": "dec_007|AFFECTS|m_fastapi",
+        "source": "dec_007",
+        "target": "m_fastapi",
+        "type": "AFFECTS"
+      },
+      {
+        "id": "dec_007|AFFECTS|m_tests",
+        "source": "dec_007",
+        "target": "m_tests",
+        "type": "AFFECTS"
+      },
+      {
+        "id": "dec_007|DOCUMENTED_IN|d_8ec9a00bfd",
+        "source": "dec_007",
+        "target": "d_8ec9a00bfd",
+        "type": "DOCUMENTED_IN"
+      },
+      {
+        "id": "dec_007|TRACKED_BY|tk_BRAIN-7",
+        "source": "dec_007",
+        "target": "tk_BRAIN-7",
+        "type": "TRACKED_BY"
+      },
+      {
+        "id": "dec_007|DISCUSSED_IN|th_007",
+        "source": "dec_007",
+        "target": "th_007",
+        "type": "DISCUSSED_IN"
+      },
+      {
+        "id": "pr_14873|IMPLEMENTS|dec_007",
+        "source": "pr_14873",
+        "target": "dec_007",
+        "type": "IMPLEMENTS"
+      },
+      {
+        "id": "dec_008|DECIDED_BY|p_74571562",
+        "source": "dec_008",
+        "target": "p_74571562",
+        "type": "DECIDED_BY"
+      },
+      {
+        "id": "dec_008|AFFECTS|m_tests",
+        "source": "dec_008",
+        "target": "m_tests",
+        "type": "AFFECTS"
+      },
+      {
+        "id": "dec_008|AFFECTS|m_fastapi_security",
+        "source": "dec_008",
+        "target": "m_fastapi_security",
+        "type": "AFFECTS"
+      },
+      {
+        "id": "dec_008|DOCUMENTED_IN|d_8ec9a00bfd",
+        "source": "dec_008",
+        "target": "d_8ec9a00bfd",
+        "type": "DOCUMENTED_IN"
+      },
+      {
+        "id": "dec_008|TRACKED_BY|tk_BRAIN-8",
+        "source": "dec_008",
+        "target": "tk_BRAIN-8",
+        "type": "TRACKED_BY"
+      },
+      {
+        "id": "dec_008|DISCUSSED_IN|th_008",
+        "source": "dec_008",
+        "target": "th_008",
+        "type": "DISCUSSED_IN"
+      },
+      {
+        "id": "pr_15116|IMPLEMENTS|dec_008",
+        "source": "pr_15116",
+        "target": "dec_008",
+        "type": "IMPLEMENTS"
+      },
+      {
+        "id": "dec_009|DECIDED_BY|p_1da23a1e",
+        "source": "dec_009",
+        "target": "p_1da23a1e",
+        "type": "DECIDED_BY"
+      },
+      {
+        "id": "dec_009|AFFECTS|m_docs_en_docs_advanced",
+        "source": "dec_009",
+        "target": "m_docs_en_docs_advanced",
+        "type": "AFFECTS"
+      },
+      {
+        "id": "dec_009|AFFECTS|m_docs_en_docs_tutorial",
+        "source": "dec_009",
+        "target": "m_docs_en_docs_tutorial",
+        "type": "AFFECTS"
+      },
+      {
+        "id": "dec_009|DOCUMENTED_IN|d_ce80719308",
+        "source": "dec_009",
+        "target": "d_ce80719308",
+        "type": "DOCUMENTED_IN"
+      },
+      {
+        "id": "dec_009|TRACKED_BY|tk_BRAIN-9",
+        "source": "dec_009",
+        "target": "tk_BRAIN-9",
+        "type": "TRACKED_BY"
+      },
+      {
+        "id": "dec_009|DISCUSSED_IN|th_009",
+        "source": "dec_009",
+        "target": "th_009",
+        "type": "DISCUSSED_IN"
+      },
+      {
+        "id": "pr_15967|IMPLEMENTS|dec_009",
+        "source": "pr_15967",
+        "target": "dec_009",
+        "type": "IMPLEMENTS"
+      },
+      {
+        "id": "dec_010|DECIDED_BY|p_02ad08f7",
+        "source": "dec_010",
+        "target": "p_02ad08f7",
+        "type": "DECIDED_BY"
+      },
+      {
+        "id": "dec_010|AFFECTS|m_docs_en_docs",
+        "source": "dec_010",
+        "target": "m_docs_en_docs",
+        "type": "AFFECTS"
+      },
+      {
+        "id": "dec_010|AFFECTS|m_fastapi",
+        "source": "dec_010",
+        "target": "m_fastapi",
+        "type": "AFFECTS"
+      },
+      {
+        "id": "dec_010|DOCUMENTED_IN|d_8ec9a00bfd",
+        "source": "dec_010",
+        "target": "d_8ec9a00bfd",
+        "type": "DOCUMENTED_IN"
+      },
+      {
+        "id": "dec_010|TRACKED_BY|tk_BRAIN-10",
+        "source": "dec_010",
+        "target": "tk_BRAIN-10",
+        "type": "TRACKED_BY"
+      },
+      {
+        "id": "dec_010|DISCUSSED_IN|th_010",
+        "source": "dec_010",
+        "target": "th_010",
+        "type": "DISCUSSED_IN"
+      },
+      {
+        "id": "pr_16088|IMPLEMENTS|dec_010",
+        "source": "pr_16088",
+        "target": "dec_010",
+        "type": "IMPLEMENTS"
+      },
+      {
+        "id": "dec_011|DECIDED_BY|p_381cc471",
+        "source": "dec_011",
+        "target": "p_381cc471",
+        "type": "DECIDED_BY"
+      },
+      {
+        "id": "dec_011|AFFECTS|m_docs_en_docs_reference",
+        "source": "dec_011",
+        "target": "m_docs_en_docs_reference",
+        "type": "AFFECTS"
+      },
+      {
+        "id": "dec_011|DOCUMENTED_IN|d_76204521b4",
+        "source": "dec_011",
+        "target": "d_76204521b4",
+        "type": "DOCUMENTED_IN"
+      },
+      {
+        "id": "dec_011|TRACKED_BY|tk_BRAIN-11",
+        "source": "dec_011",
+        "target": "tk_BRAIN-11",
+        "type": "TRACKED_BY"
+      },
+      {
+        "id": "dec_011|DISCUSSED_IN|th_011",
+        "source": "dec_011",
+        "target": "th_011",
+        "type": "DISCUSSED_IN"
+      },
+      {
+        "id": "pr_15930|IMPLEMENTS|dec_011",
+        "source": "pr_15930",
+        "target": "dec_011",
+        "type": "IMPLEMENTS"
+      },
+      {
+        "id": "dec_012|DECIDED_BY|p_02ad08f7",
+        "source": "dec_012",
+        "target": "p_02ad08f7",
+        "type": "DECIDED_BY"
+      },
+      {
+        "id": "dec_012|AFFECTS|m_docs_en_docs",
+        "source": "dec_012",
+        "target": "m_docs_en_docs",
+        "type": "AFFECTS"
+      },
+      {
+        "id": "dec_012|AFFECTS|m_fastapi",
+        "source": "dec_012",
+        "target": "m_fastapi",
+        "type": "AFFECTS"
+      },
+      {
+        "id": "dec_012|DOCUMENTED_IN|d_8ec9a00bfd",
+        "source": "dec_012",
+        "target": "d_8ec9a00bfd",
+        "type": "DOCUMENTED_IN"
+      },
+      {
+        "id": "dec_012|TRACKED_BY|tk_BRAIN-12",
+        "source": "dec_012",
+        "target": "tk_BRAIN-12",
+        "type": "TRACKED_BY"
+      },
+      {
+        "id": "dec_012|DISCUSSED_IN|th_012",
+        "source": "dec_012",
+        "target": "th_012",
+        "type": "DISCUSSED_IN"
+      },
+      {
+        "id": "pr_16106|IMPLEMENTS|dec_012",
+        "source": "pr_16106",
+        "target": "dec_012",
+        "type": "IMPLEMENTS"
+      }
+    ]
+  },
+  "decisions": [
+    {
+      "id": "dec_004",
+      "title": "Implement structured request lifecycle telemetry in tests",
+      "decided_at": 1760193954,
+      "status": "active",
+      "freshness": "stale",
+      "drift_count": 81,
+      "latest_drift_at": 1785345338,
+      "module_ids": [
+        "m_fastapi",
+        "m_tests"
+      ],
+      "decider": "Contributor 02ad08f7"
+    },
+    {
+      "id": "dec_003",
+      "title": "Deprecate legacy synchronous interfaces in fastapi/dependencies",
+      "decided_at": 1758381953,
+      "status": "active",
+      "freshness": "stale",
+      "drift_count": 58,
+      "latest_drift_at": 1785252312,
+      "module_ids": [
+        "m_tests",
+        "m_fastapi_dependencies"
+      ],
+      "decider": "Contributor d04a0b32"
+    },
+    {
+      "id": "dec_001",
+      "title": "Standardize error handling and exception formatting in docs/en/docs",
+      "decided_at": 1753522542,
+      "status": "superseded",
+      "freshness": "superseded",
+      "drift_count": 56,
+      "latest_drift_at": 1785345338,
+      "module_ids": [
+        "m_docs_en_docs"
+      ],
+      "decider": "Contributor a2f63251"
+    },
+    {
+      "id": "dec_007",
+      "title": "Optimize serialization and payload parsing in fastapi",
+      "decided_at": 1770647517,
+      "status": "active",
+      "freshness": "stale",
+      "drift_count": 44,
+      "latest_drift_at": 1785345338,
+      "module_ids": [
+        "m_fastapi",
+        "m_tests"
+      ],
+      "decider": "Contributor 1da23a1e"
+    },
+    {
+      "id": "dec_005",
+      "title": "Enforce strict schema validation rules in fastapi/dependencies",
+      "decided_at": 1764643195,
+      "status": "active",
+      "freshness": "stale",
+      "drift_count": 40,
+      "latest_drift_at": 1785252312,
+      "module_ids": [
+        "m_tests",
+        "m_fastapi_dependencies"
+      ],
+      "decider": "Contributor 80213f74"
+    },
+    {
+      "id": "dec_002",
+      "title": "Migrate configuration parameters to environment variables in docs/en/docs/advanced",
+      "decided_at": 1756627147,
+      "status": "superseded",
+      "freshness": "superseded",
+      "drift_count": 19,
+      "latest_drift_at": 1784924972,
+      "module_ids": [
+        "m_docs_en_docs_advanced"
+      ],
+      "decider": "Contributor d4928ba9"
+    },
+    {
+      "id": "dec_010",
+      "title": "Implement idempotent state transitions in docs/en/docs",
+      "decided_at": 1785227391,
+      "status": "active",
+      "freshness": "stale",
+      "drift_count": 13,
+      "latest_drift_at": 1785345338,
+      "module_ids": [
+        "m_docs_en_docs",
+        "m_fastapi"
+      ],
+      "decider": "Contributor 02ad08f7"
+    },
+    {
+      "id": "dec_008",
+      "title": "Adopt granular permission scoping across fastapi/security",
+      "decided_at": 1773649008,
+      "status": "active",
+      "freshness": "stale",
+      "drift_count": 8,
+      "latest_drift_at": 1785252312,
+      "module_ids": [
+        "m_tests",
+        "m_fastapi_security"
+      ],
+      "decider": "Contributor 74571562"
+    },
+    {
+      "id": "dec_006",
+      "title": "Refactor dependency injection graph for tests/benchmarks",
+      "decided_at": 1766057049,
+      "status": "active",
+      "freshness": "fresh",
+      "drift_count": 0,
+      "latest_drift_at": null,
+      "module_ids": [
+        "m_tests_benchmarks"
+      ],
+      "decider": "Contributor 02ad08f7"
+    },
+    {
+      "id": "dec_009",
+      "title": "Isolate connection pooling and retry policies in docs/en/docs/advanced",
+      "decided_at": 1784917772,
+      "status": "active",
+      "freshness": "fresh",
+      "drift_count": 0,
+      "latest_drift_at": null,
+      "module_ids": [
+        "m_docs_en_docs_advanced",
+        "m_docs_en_docs_tutorial"
+      ],
+      "decider": "Contributor 1da23a1e"
+    },
+    {
+      "id": "dec_011",
+      "title": "Standardize pagination semantics and metadata in docs/en/docs/reference",
+      "decided_at": 1785244101,
+      "status": "active",
+      "freshness": "fresh",
+      "drift_count": 0,
+      "latest_drift_at": null,
+      "module_ids": [
+        "m_docs_en_docs_reference"
+      ],
+      "decider": "Contributor 381cc471"
+    },
+    {
+      "id": "dec_012",
+      "title": "Enhance cache invalidation coordination for docs/en/docs",
+      "decided_at": 1785338138,
+      "status": "active",
+      "freshness": "fresh",
+      "drift_count": 0,
+      "latest_drift_at": null,
+      "module_ids": [
+        "m_docs_en_docs",
+        "m_fastapi"
+      ],
+      "decider": "Contributor 02ad08f7"
+    }
+  ],
+  "reviews": []
+}
