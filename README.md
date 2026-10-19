@@ -7,7 +7,7 @@
 
 ## 🌐 Live Demo URL
 
-**Live Demo URL: https://developers.cloudflare.com/agent-setup/prompt.md
+**Live Demo URL**: [https://graph-hack.aryapd12345.workers.dev](https://graph-hack.aryapd12345.workers.dev)
 
 ---
 
