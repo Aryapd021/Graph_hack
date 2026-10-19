@@ -13,3 +13,4 @@ scratch/
 *.egg-info/
 *.log
 .cloudflare/
+.vercel/
